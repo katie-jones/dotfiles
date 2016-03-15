@@ -76,6 +76,9 @@ set splitright
 " set latex cls files to tex
 au BufNewFile,BufRead *.cls set filetype=tex
 
+" set bash_profile (no .) to bash
+au BufNewFile,BufRead bash_profile call SetFileTypeSH("bash")
+
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
 " ---------------------------------------------
