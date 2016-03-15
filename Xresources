@@ -1,0 +1,16 @@
+!----------------------------------
+!------------- urxvt --------------
+!----------------------------------
+
+! solarized
+#include ".Xresources.d/solarized.light"
+URxvt.intensityStyles: 0
+
+! no scroll bar
+URxvt.scrollBar: 0
+
+! perl
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.ur-select.launcher: opera
+URxvt.url-select.underline: true
+
