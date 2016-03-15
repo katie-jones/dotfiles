@@ -58,6 +58,7 @@ call togglebg#map("<F5>")
 
 " YouCompleteMe shit
 let g:EclimCompletionMethod = 'omnifunc'
+let g:ycm_path_to_python_interpreter = "/usr/bin/python"
 
 
 " line numbering
