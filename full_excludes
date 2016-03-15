@@ -1,0 +1,12 @@
+/home/*
+/mnt/*
+/dev/*
+/proc/*
+/sys/*
+/tmp/*
+/run/*
+/media/*
+/lost+found
+*~
+*.swp
+/var/cache/*
