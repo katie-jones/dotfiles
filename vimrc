@@ -72,8 +72,16 @@ set nolist
 set splitbelow
 set splitright
 
+" ---------------------------------------------
+" ---------------- FILE TYPES -----------------
+" ---------------------------------------------
+
 " set latex cls files to tex
 au BufNewFile,BufRead *.cls set filetype=tex
+
+" vraperrc files to vim
+au BufNewFile,BufRead vrapperrc set filetype=vim
+au BufNewFile,BufRead .vrapperrc set filetype=vim
 
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
