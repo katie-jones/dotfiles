@@ -1,0 +1,33 @@
+#!/bin/sh
+mount_point=/mnt/backups # where backup drive is mounted
+backup_folder=/mnt/backups # root folder holding backups
+to_backup=/ # folder to backup -- should start and end with a /
+excludes=/home/katie/.full_excludes # file with stuff to exclude
+
+
+link_name=current # name of symbolic link to previous backup
+folder_name=full-`date "+%Y.%m.%d-%H.%M"` # name of folder holding new backup
+
+if ! grep -qs $mount_point /proc/mounts ; then
+    echo "not mounted"
+    if ! mount $mount_point ; then
+        echo "Mounting failed."
+        exit 1
+    else
+        echo "Mounting successful"
+    fi
+else
+    echo "mounted"
+fi
+
+mkdir -p $backup_folder/$folder_name$to_backup
+
+if [ -d $backup_folder/$link_name ] ; then 
+    rsync -au --info=progress2 --exclude-from=$excludes --link-dest=$backup_folder/$link_name $to_backup $backup_folder/$folder_name$to_backup
+else
+    rsync -au --info=progress2 --exclude-from=$excludes $to_backup $backup_folder/$folder_name$to_backup
+fi
+
+rm -f $backup_folder/$link_name
+ln -s $backup_folder/$folder_name$to_backup $backup_folder/$link_name
+
