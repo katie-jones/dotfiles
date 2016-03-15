@@ -1,0 +1,5 @@
+# some vim history file
+vim/.netrwhist
+
+# ignore vim bundles -- contain only other git repos
+vim/bundle
