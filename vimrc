@@ -108,7 +108,7 @@ map .. <leader>c<SPACE>
 
 
 " NERDTree stuff
-nnoremap <C-N> :NERDTreeTabsToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 
 " ---------------------------------------------
