@@ -73,11 +73,19 @@ set nolist
 set splitbelow
 set splitright
 
+" ---------------------------------------------
+" ---------------- FILE TYPES -----------------
+" ---------------------------------------------
+
 " set latex cls files to tex
 au BufNewFile,BufRead *.cls set filetype=tex
 
 " set bash_profile (no .) to bash
 au BufNewFile,BufRead bash_profile call SetFileTypeSH("bash")
+
+" vraperrc files to vim
+au BufNewFile,BufRead vrapperrc set filetype=vim
+au BufNewFile,BufRead .vrapperrc set filetype=vim
 
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
@@ -112,7 +120,7 @@ map .. <leader>c<SPACE>
 
 
 " NERDTree stuff
-nnoremap <C-N> :NERDTreeTabsToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 
 " ---------------------------------------------
