@@ -10,7 +10,13 @@ URxvt.intensityStyles: 0
 URxvt.scrollBar: 0
 
 ! perl
-URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.perl-ext-common: tabbed,clipboard,url-select,keyboard-select
 URxvt.ur-select.launcher: opera
 URxvt.url-select.underline: true
+
+! tab colors
+URxvt.tabbed.tabbar-fg: 6
+URxvt.tabbed.tabbar-bg: 15
+URxvt.tabbed.tab-fg: 15
+URxvt.tabbed.tab-bg: 6
 
