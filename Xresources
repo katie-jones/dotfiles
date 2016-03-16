@@ -20,3 +20,7 @@ URxvt.tabbed.tabbar-bg: 15
 URxvt.tabbed.tab-fg: 15
 URxvt.tabbed.tab-bg: 6
 
+! Font
+!URxvt.font: xft:Terminus:pixelsize=12
+URxvt.font: xft:inconsolata:pixelsize=15
+!URxvt.letterSpace: -2
