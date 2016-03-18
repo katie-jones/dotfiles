@@ -22,6 +22,6 @@ map <silent> ge <Plug>CamelCaseMotion_ge
 " remap NERD Commenter toggle command
 map .. <leader>c<SPACE>
 
+" set default YCM config file
+let g:ycm_global_ycm_extra_conf = '~/.ycm_conf_c.py'
 
-"vnoremap ,c :call NERDComment(0,"toggle")<C-m>
-"nnoremap ,c :call NERDComment(0,"toggle")<C-m>
