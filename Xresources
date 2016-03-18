@@ -10,7 +10,7 @@ URxvt.intensityStyles: 0
 URxvt.scrollBar: 0
 
 ! perl
-URxvt.perl-ext-common: tabbed,clipboard,url-select,keyboard-select
+URxvt.perl-ext-common: tabbed,clipboard,url-select,keyboard-select,fullscreen,resize-font
 URxvt.ur-select.launcher: opera
 URxvt.url-select.underline: true
 
@@ -21,6 +21,11 @@ URxvt.tabbed.tab-fg: 15
 URxvt.tabbed.tab-bg: 6
 
 ! Font
-!URxvt.font: xft:Terminus:pixelsize=12
 URxvt.font: xft:inconsolata:pixelsize=15
-!URxvt.letterSpace: -2
+
+! Key bindings
+URxvt.keysym.F11: fullscreen:switch
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+URxvt.resize-font.reset: C-equal
+
