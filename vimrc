@@ -60,7 +60,6 @@ call togglebg#map("<F5>")
 let g:EclimCompletionMethod = 'omnifunc'
 let g:ycm_path_to_python_interpreter = "/usr/bin/python"
 
-
 " line numbering
 set number
 
@@ -72,6 +71,12 @@ set nolist
 " more natural window splitting
 set splitbelow
 set splitright
+
+" // comments
+let g:NERDCustomDelimiters = {'c': { 'leftAlt': '/*', 'rightAlt': '*/', 'left': '//'}}
+
+" spaces before comments
+let g:NERDSpaceDelims=1
 
 " ---------------------------------------------
 " ---------------- FILE TYPES -----------------
