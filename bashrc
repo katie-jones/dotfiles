@@ -18,7 +18,6 @@ export EDITOR=vim
 
 # export gopath
 export GOPATH=$HOME/gopath
-TEXBIN=/usr/local/texlive/2015/bin/x86_64-linux
 
-export PATH=$TEXBIN:$GOPATH:$GOPATH/bin:$PATH
+export PATH=$GOPATH:$GOPATH/bin:$PATH
 
