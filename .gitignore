@@ -3,3 +3,6 @@ vim/.netrwhist
 
 # ignore vim bundles -- contain only other git repos
 vim/bundle
+
+# ignore python compiled files
+*.pyc
