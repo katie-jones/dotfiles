@@ -1,0 +1,21 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+/dev/mapper/LinuxVG-elementary /               ext4    errors=remount-ro 0       1
+# /boot/efi was on /dev/sda1 during installation
+#UUID=2860-11F4  /boot/efi       vfat    defaults        0       1
+# swap was on /dev/sda7 during installation
+UUID=01098383-d26f-4fc3-a570-2fa65f767a0c none            swap    sw              0       0
+
+# shared partition
+UUID=2b404128-4898-37a3-87e4-ea4a12bf1698	/mnt/shared	hfsplus	rw,exec,auto	0	2
+
+# linux home partition
+UUID=176525c7-1bf1-425d-9745-e4ec860a4b0c	/mnt/lhome	ext4	rw,exec,auto	0	2
+
+# matlab partition
+UUID=ac479f9d-78d7-4066-b03a-86945c253d12	/usr/local/MATLAB 	ext4 	rw,exec,auto 	0	2
