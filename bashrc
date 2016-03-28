@@ -21,3 +21,10 @@ export GOPATH=$HOME/gopath
 
 export PATH=$GOPATH:$GOPATH/bin:$PATH
 
+# Solarized colors in console
+source .solarized_dark
+
+# Add MATLAB to path
+MATLABPATH=/usr/local/MATLAB/R2014b/bin
+export PATH=$PATH:$MATLABPATH
+

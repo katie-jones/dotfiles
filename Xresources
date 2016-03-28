@@ -3,7 +3,7 @@
 !----------------------------------
 
 ! solarized
-#include ".Xresources.d/solarized.light"
+#include ".Xresources.d/solarized.dark"
 URxvt.intensityStyles: 0
 
 ! no scroll bar
@@ -14,18 +14,17 @@ URxvt.perl-ext-common: tabbed,clipboard,url-select,keyboard-select,fullscreen,re
 URxvt.ur-select.launcher: opera
 URxvt.url-select.underline: true
 
-! tab colors
-URxvt.tabbed.tabbar-fg: 6
-URxvt.tabbed.tabbar-bg: 15
-URxvt.tabbed.tab-fg: 15
-URxvt.tabbed.tab-bg: 6
 
 ! Font
-URxvt.font: xft:inconsolata:pixelsize=15
+URxvt.font: xft:inconsolata:size=14
 
 ! Key bindings
-URxvt.keysym.F11: fullscreen:switch
+URxvt.keysym.F11: perl:fullscreen:switch
 URxvt.resize-font.smaller: C-Down
 URxvt.resize-font.bigger: C-Up
 URxvt.resize-font.reset: C-equal
+
+! Turn off annoying C-S keybindings
+URxvt*iso14755: false
+URxvt*iso14755_52: false
 
