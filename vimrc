@@ -53,6 +53,8 @@ syntax enable
 set background=light
 colorscheme solarized
 
+set spell spelllang=en_us
+
 " Toggle between light/dark color schemes
 call togglebg#map("<F5>")
 
@@ -122,6 +124,9 @@ map .. <leader>c<SPACE>
 
 " NERDTree stuff
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+" write as sudo
+cnoremap w!! w !sudo tee % >/dev/null
 
 
 " ---------------------------------------------
