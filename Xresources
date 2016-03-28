@@ -23,8 +23,6 @@ URxvt.keysym.F11: perl:fullscreen:switch
 URxvt.resize-font.smaller: C-Down
 URxvt.resize-font.bigger: C-Up
 URxvt.resize-font.reset: C-equal
-!URxvt.keysym.M-C-c:   perl:clipboard:copy
-!URxvt.keysym.M-C-v:   perl:clipboard:paste
 
 ! Turn off annoying C-S keybindings
 URxvt*iso14755: false
