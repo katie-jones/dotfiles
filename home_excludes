@@ -6,3 +6,5 @@
 NDS.vdi
 /katie/arch_arm
 /katie/pkgs
+/katie/dotfiles
+/katie/.vim
