@@ -14,6 +14,12 @@ PS1='\[\e[0;34m\]\u \W > \[\e[0m\]'
 alias mkgrubcfg='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mkgrubsa='sudo grub-mkstandalone -o boot.efi -d /usr/lib/grub/x86_64-efi -O x86_64-efi --compress=xz /boot/grub/grub.cfg'
 
+# function for ecryptfs
+mtecrypt() {
+    ecryptfs-insert-wrapped-passphrase-into-keyring /home/katie/.ecryptfs/wrapped-passphrase
+    mount -i /home/katie/important
+}
+
 export EDITOR=vim
 
 # export gopath
@@ -28,3 +34,5 @@ source ~/.solarized_dark
 MATLABPATH=/usr/local/MATLAB/R2014b/bin
 export PATH=$PATH:$MATLABPATH
 
+# visual bell
+set bell-style visible
