@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Script to make backups of root and home directories
 # Input: "home" and/or "full"
 # Options: 
@@ -21,14 +21,11 @@
 #---------------------------------- VARIABLES ----------------------------------
 #-------------------------------------------------------------------------------
 
-# Variables common to both home and full backups
-set_common_vars() {
-    mount_point=/mnt/backups # where backup drive is mounted
-    backup_folder=/mnt/backups # root folder holding backups
-}
 
 # Variables specific to home backups
 set_home_vars() {
+    mount_point=/mnt/backups/home # where backup drive is mounted
+    backup_folder=/mnt/backups/home # root folder holding backups
     to_backup=/home/ # folder to backup -- should start and end with a /
     excludes=/home/katie/.home_excludes # file with stuff to exclude
     logfile=/var/log/backups/home.log # file to send output and rsync logs to
@@ -40,6 +37,8 @@ set_home_vars() {
 
 # Variables specific to root backups
 set_full_vars() {
+    mount_point=/mnt/backups/root # where backup drive is mounted
+    backup_folder=/mnt/backups/root # root folder holding backups
     to_backup=/ # folder to backup -- should start and end with a /
     excludes=/home/katie/.full_excludes # file with stuff to exclude
     logfile=/var/log/backups/full.log # file to send output and rsync logs to
@@ -59,7 +58,6 @@ set_full_vars() {
 
 main() {
     check_root
-    set_common_vars
 
     current_date=`date "+%s"` # current date in UNIX time
     test_times=1 # test timestamps by default
@@ -150,26 +148,16 @@ mount_backups() {
 
 check_date() {
 
-    local max_lines=100 # max lines to search in log file for last date
+    local max_lines=10000 # max lines to search in log file for last date
     local x1=
     local x2=
-    local ldate=
     local lastdate=
 
     # If logfile exists, look through end of file for line:
     # sucessful backup: (date) and store date
     if [ -f $logfile ]; then
-        for ((i=1;i<=max_lines;i++)); do
-            local var=$(tail -$i $logfile)
-
-            read x1 x2 ldate <<< $var
-
-            if [ $x1 == successful ] && [ $x2 == backup: ]
-            then
-                lastdate=$ldate
-                break
-            fi
-        done
+    read x1 x2 lastdate <<< $(tail -$max_lines $logfile | \
+        grep "successful backup: [0-9]*" | tail -1)
     fi
 
     # If no date found in file, look through backup directory
@@ -240,10 +228,10 @@ make_backups() {
         ln -s $backup_folder/$folder_name$to_backup $backup_folder/$link_name
 
         # Echo line to log file to parse next time we run the script
-        echo successful backup: $current_date >>$logfile
+        echo successful backup: $current_date >> $logfile
     else
         echoerr Rsync problem. Backup unsuccessful.
-        echo successful backup: $lastbackupdate >>$logfile
+        [ -z $test_times ] || echo successful backup: $lastbackupdate >> $logfile
     fi
 }
 
@@ -285,5 +273,5 @@ check_root() {
 
 
 # Run main function
+echo done
 main "$@"
-

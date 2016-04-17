@@ -52,6 +52,7 @@ filetype plugin indent on    " required
 syntax enable
 set background=light
 colorscheme solarized
+set vb
 
 set spell spelllang=en_us
 
