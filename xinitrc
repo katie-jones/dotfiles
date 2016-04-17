@@ -50,6 +50,6 @@ fi
 
 twm &
 xclock -geometry 50x50-1+1 &
-
+syndaemon -dtKRi 1
 xbindkeys
 exec startlxqt
