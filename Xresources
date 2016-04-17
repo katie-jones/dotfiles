@@ -21,7 +21,7 @@ URxvt.tabbed.tab-fg: 15
 URxvt.tabbed.tab-bg: 6
 
 ! Font
-URxvt.font: xft:inconsolata:pixelsize=15
+URxvt.font: xft:inconsolata:pixelsize=16
 
 ! Key bindings
 URxvt.keysym.F11: fullscreen:switch
