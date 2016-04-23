@@ -3,7 +3,7 @@
 !----------------------------------
 
 ! solarized
-#include ".Xresources.d/solarized.dark"
+#include ".Xresources.d/solarized.light"
 URxvt.intensityStyles: 0
 
 ! no scroll bar
