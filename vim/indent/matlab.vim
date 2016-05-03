@@ -3,6 +3,11 @@
 " Maintainer:	Fabrice Guy <fabrice.guy at gmail dot com>
 " Last Change:	2009 Nov 23 - Added support for if/end block on the same line
 
+" change shiftwidth to 2 with soft tabs
+set shiftwidth=4
+set tabstop=4
+set expandtab
+
 " Only load this indent file when no other was loaded.
 if exists("b:did_indent")
   finish
