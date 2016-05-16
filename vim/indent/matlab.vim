@@ -3,6 +3,12 @@
 " Maintainer:	Fabrice Guy <fabrice.guy at gmail dot com>
 " Last Change:	2009 Nov 23 - Added support for if/end block on the same line
 
+" change shiftwidth to 4 with soft tabs
+set shiftwidth=4
+set tabstop=4
+set expandtab
+
+
 " Only load this indent file when no other was loaded.
 if exists("b:did_indent")
   finish
@@ -12,6 +18,7 @@ let s:functionWithoutEndStatement = 0
 
 setlocal indentexpr=GetMatlabIndent()
 setlocal indentkeys=!,o,O=end,=case,=else,=elseif,=otherwise,=catch
+" setlocal indentkeys=!,o,O=end,=else,=elseif,=otherwise,=catch
 
 " Only define the function once.
 if exists("*GetMatlabIndent")
@@ -66,7 +73,7 @@ function GetMatlabIndent()
   endif
   " Add a 'shiftwidth' after classdef, properties, switch, methods, events,
   " function, if, while, for, otherwise, case, try, catch, else, elseif
-  if getline(plnum) =~ '^\s*\(classdef\|properties\|switch\|methods\|events\|function\|if\|while\|for\|otherwise\|case\|try\|catch\|else\|elseif\)\>'
+  if getline(plnum) =~ '^\s*\(classdef\|properties\|switch\|methods\|events\|function\|if\|while\|for\|case\|otherwise\|try\|catch\|else\|elseif\)\>'
     let curind = curind + &sw
     " In Matlab we have different kind of functions
     " - the main function (the function with the same name than the filename)
@@ -120,14 +127,14 @@ function GetMatlabIndent()
     let curind = curind - &sw
   endif
   " First case after a switch : indent
-  if getline(v:lnum) =~ '^\s*case'
-    while plnum > 0 && (getline(plnum) =~ '^\s*%' || getline(plnum) =~ '^\s*$')
-      let plnum = plnum - 1
-    endwhile
-    if getline(plnum) =~ '^\s*switch'
-      let curind = indent(plnum) + &sw
-    endif
-  endif
+  " if getline(v:lnum) =~ '^\s*case'
+    " while plnum > 0 && (getline(plnum) =~ '^\s*%' || getline(plnum) =~ '^\s*$')
+      " let plnum = plnum - 1
+    " endwhile
+    " if getline(plnum) =~ '^\s*switch'
+      " let curind = indent(plnum) + &sw
+    " endif
+  " endif
 
   " end in a switch / end block : dedent twice
   " we use the matchit script to know if this end is the end of a switch block
@@ -135,7 +142,7 @@ function GetMatlabIndent()
     if getline(v:lnum) =~ '^\s*end'
       normal %
       if getline(line('.')) =~ '^\s*switch'
-	let curind = curind - &sw
+	let curind = curind - &sw - &sw
       endif
       normal %
     end

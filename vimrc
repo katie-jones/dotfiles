@@ -91,6 +91,10 @@ au BufNewFile,BufRead *.cls set filetype=tex
 au BufNewFile,BufRead vrapperrc set filetype=vim
 au BufNewFile,BufRead .vrapperrc set filetype=vim
 
+" cc files to cpp
+au BufNewFile,BufRead *.cc set filetype=cpp
+
+
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
 " ---------------------------------------------
