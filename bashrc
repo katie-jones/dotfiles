@@ -22,6 +22,7 @@ mtecrypt() {
 }
 
 export EDITOR=vim
+export MAKEFLAGS='-j4'
 
 # export gopath
 export GOPATH=$HOME/gopath
@@ -37,3 +38,9 @@ export PATH=$PATH:$MATLABPATH
 
 # visual bell
 set bell-style visible
+
+# restart network manager
+restart_netman() {
+    sudo kill $(ps aux | grep NetworkManager | head -1 | gawk '{ print $2 }')
+}
+

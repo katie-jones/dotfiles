@@ -94,6 +94,9 @@ au BufNewFile,BufRead .vrapperrc set filetype=vim
 " cc files to cpp
 au BufNewFile,BufRead *.cc set filetype=cpp
 
+" bash_katie to sh
+au BufNewFile,BufRead .bash_katie set filetype=sh
+
 
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
