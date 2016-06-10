@@ -125,14 +125,14 @@ function GetMatlabIndent()
     let curind = curind - &sw
   endif
   " First case after a switch : indent
-  if getline(v:lnum) =~ '^\s*case'
-    while plnum > 0 && (getline(plnum) =~ '^\s*%' || getline(plnum) =~ '^\s*$')
-      let plnum = plnum - 1
-    endwhile
-    if getline(plnum) =~ '^\s*switch'
-      let curind = indent(plnum) + &sw
-    endif
-  endif
+  " if getline(v:lnum) =~ '^\s*case'
+    " while plnum > 0 && (getline(plnum) =~ '^\s*%' || getline(plnum) =~ '^\s*$')
+      " let plnum = plnum - 1
+    " endwhile
+    " if getline(plnum) =~ '^\s*switch'
+      " let curind = indent(plnum) + &sw
+    " endif
+  " endif
 
   " end in a switch / end block : dedent twice
   " we use the matchit script to know if this end is the end of a switch block
