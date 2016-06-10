@@ -9,9 +9,9 @@
 #
 # (An example:)
 binlist=(
-   ''
+   '/home/katie/.xinit_deepin'
+   '/home/katie/.xinit_lxqt'
    '/bin/bash --login'             # or just execute your shell,
-   '/usr/bin/fbterm'               # or start a frame buffer console,
    '/usr/bin/reboot'								# or go to a submenu :)
    '/usr/bin/shutdown'							
 # or go to a submenu :)
@@ -22,14 +22,14 @@ binlist=(
 # Names with whitespaces should be quoted or escaped.
 #
 # (Continued example:)
-namelist=(LXQT Shell FBterm reboot shutdown )
+namelist=(Deepin LXQT Shell reboot shutdown )
 
 # Type of the programs, one-by-one matched with $binlist.
 # `C' for *C*onsole programs, which would be `exec'ed.
 # `X' for *X* programs, which would be run with cdm-xlaunch(1).
 #
 # (Continued example:)
-flaglist=(X C C C C)
+flaglist=(X X C C C)
 
 # Style for the cdm dialog, which is printed with dialog(1).
 # Default to unset, causing dialog(1) to use the system wide default.
