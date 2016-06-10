@@ -16,11 +16,11 @@ HOME_BACKUP_UUID="3e41cb52-f707-4186-8f68-b1a2da0d8b3f"
 BACKUP_UUID="62d583a4-3b9b-44a1-a5d0-f68fb8aeae38"
 
 UUIDS=( $ROOT_UUID $SWAP_UUID $SHARED_UUID $SCHOOL_UUID $HOME_UUID $MATLAB_UUID $MATLAB_UUID_TWO $BOOT_UUID $BACKUP_UUID )
-MTPTS=( "/" "none" "/mnt/shared" "/home/katie/school" "/home" "/usr/local/MATLAB/R2014b" "/usr/local/MATLAB/R2009b" "/mnt/boot" "/mnt/backups/root" )
+MTPTS=( "/" "none" "/mnt/shared" "/home/katie/school" "/home" "/usr/local/MATLAB/R2014b" "/usr/local/MATLAB/R2009b" "/boot" "/mnt/backups/root" )
 FORMATS=( "ext4" "swap" "hfsplus" "hfsplus" "ext4" "ext4" "ext4" "ext2" "ext4" )
-OPTIONS=( "errors=remount-ro" "sw" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,noauto" "rw,noauto" )
-CHECKS=( "0 1" "0 0" "0 2" "0 2" "0 2" "0 2" "0 2" "0 0" "0 0" )
-COMMENTS=( "root partition" "swap" "shared partition" "school partition" "linux home partition" "matlab 2014b partition" "matlab 2009b partition" "arch boot partition" "root backup partition" )
+OPTIONS=( "errors=remount-ro" "sw" "rw,exec,noauto" "rw,exec,noauto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,auto" "rw,noauto" )
+CHECKS=( "0 2" "0 0" "0 2" "0 2" "0 2" "0 2" "0 2" "0 1" "0 0" )
+COMMENTS=( "root partition" "swap" "shared partition" "school partition" "linux home partition" "matlab 2014b partition" "matlab 2009b partition" "boot partition" "root backup partition" )
 
 n=9
 
