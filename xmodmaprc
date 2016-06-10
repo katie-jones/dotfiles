@@ -1,0 +1,4 @@
+clear Mod4
+add Mod4 = Super_L Hyper_L
+
+keycode 134 = F13
