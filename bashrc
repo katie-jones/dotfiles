@@ -11,6 +11,9 @@ alias ls='ls --color=auto'
 # PS1='\[\e[0;34m\]\u \W > \[\e[0m\]'
 PS1='\[\033[0;34m\]\u \W > \[\033[00m\]'
 
+# check sudo commands for aliases
+alias sudo='sudo '
+
 # alias for common grub commands
 alias mkgrubfile='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mkgrubsa='sudo grub-mkstandalone -o boot.efi -d /usr/lib/grub/x86_64-efi -O x86_64-efi --compress=xz /boot/grub/grub.cfg'
@@ -50,3 +53,8 @@ export PATH=$PATH:$MATLABPATH
 
 # visual bell
 set bell-style visible
+
+# alias for pacman commands
+alias pacup='pacman -Suy'
+alias pacget='pacman -S'
+alias pacdel='pacman -Runs'
