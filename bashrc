@@ -11,6 +11,9 @@ alias ls='ls --color=auto'
 # PS1='\[\e[0;34m\]\u \W > \[\e[0m\]'
 PS1='\[\033[0;34m\]\u \W > \[\033[00m\]'
 
+# use threading in make
+export MAKEFLAGS='-j5'
+
 # check sudo commands for aliases
 alias sudo='sudo '
 
