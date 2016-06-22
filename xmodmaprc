@@ -1,4 +1,2 @@
-clear Mod4
-add Mod4 = Super_L Hyper_L
-
-keycode 134 = F13
+clear lock
+keysym Caps_Lock = F13 Caps_Lock
