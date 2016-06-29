@@ -47,3 +47,8 @@ let g:Tex_Env_figure = "\\begin{figure}[<++>]\<CR>\\centering\<CR>\\includegraph
 " subfigure
 call IMAP('ESF',"\\begin{subfigure}{<+subfigure width+>}\<CR>\\includegraphics[<+image size+>]{<+image file+>}\<CR>\\caption{<+caption+>}<++>\<CR>\\end{subfigure}\<CR><++>",'tex')
 
+
+" Maps for mathbf
+call IMAP('EBF',"\\mathbf{<++>}<++>",'tex') " insert mode
+xnoremap <leader>b <Esc>`>a}<Esc>`<i\mathbf{<Esc>
+nnoremap <leader>b ciw\mathbf{<C-r>"}<Esc>
