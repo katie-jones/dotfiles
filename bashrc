@@ -44,3 +44,9 @@ restart_netman() {
     sudo kill $(ps aux | grep NetworkManager | head -1 | gawk '{ print $2 }')
 }
 
+# check if xmodmap has already been run, and if not run it
+x=$(xmodmap -pke | grep Caps_Lock | grep F13)
+if [[ -z "$x" ]];
+then
+    xmodmap ~/.Xmodmap
+fi
