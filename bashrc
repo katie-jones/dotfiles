@@ -22,12 +22,14 @@ mtecrypt() {
 }
 
 export EDITOR=vim
-export MAKEFLAGS='-j4'
+export MAKEFLAGS='-j2'
 
 # export gopath
 export GOPATH=$HOME/gopath
-
 export PATH=$GOPATH:$GOPATH/bin:$PATH
+
+# linker library path for new version of gcc
+export LD_LIBRARY_PATH=/usr/local/lib64
 
 # Solarized colors in console
 source ~/.solarized_dark
@@ -39,8 +41,13 @@ export PATH=$PATH:$MATLABPATH
 # visual bell
 set bell-style visible
 
+# run system update
+update_system() {
+    sudo aptitude update && sudo aptitude dist-upgrade
+}
+
 # restart network manager
-restart_netman() {
+netman_restart() {
     sudo kill $(ps aux | grep NetworkManager | head -1 | gawk '{ print $2 }')
 }
 
