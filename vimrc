@@ -35,6 +35,8 @@ Plugin 'Valloric/YouCompleteMe' " for code completion
 Plugin 'scrooloose/nerdtree' " for directory navigation
 Plugin 'jistr/vim-nerdtree-tabs' " for using nerdtree with tabs in vim
 Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
+Plugin 'hdima/python-syntax' " python syntax highlighting
+Plugin 'hynek/vim-python-pep8-indent' " python indentation
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
