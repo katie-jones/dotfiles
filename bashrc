@@ -26,10 +26,10 @@ alias mkarchgrub='sudo grub-localconfig -o /mnt/shared/bootfiles/grub.d/39_arch'
 mkgrubcfg() {
     cp /mnt/shared/bootfiles/boot.efi /mnt/shared/bootfiles/boot.efi.old
     sudo grub-mkconfig -o /boot/grub/grub.cfg && \
-    sudo grub-mkstandalone -o /mnt/shared/bootfiles/boot.efi -d /usr/lib/grub/x86_64-efi -O x86_64-efi --compress=xz /boot/grub/grub.cfg && \
-    sudo mount UUID=b801a995-2e0b-3440-bb4a-cacccb9e233c /mnt/efi && \
-    sudo cp -v /mnt/shared/bootfiles/boot.efi /mnt/efi/System/Library/CoreServices/ &&
-    sudo umount /mnt/efi
+        sudo grub-mkstandalone -o /mnt/shared/bootfiles/boot.efi -d /usr/lib/grub/x86_64-efi -O x86_64-efi --compress=xz /boot/grub/grub.cfg && \
+        sudo mount UUID=b801a995-2e0b-3440-bb4a-cacccb9e233c /mnt/efi && \
+        sudo cp -v /mnt/shared/bootfiles/boot.efi /mnt/efi/System/Library/CoreServices/ &&
+        sudo umount /mnt/efi
 }
 
 
@@ -61,3 +61,18 @@ set bell-style visible
 alias pacup='pacman -Suy'
 alias pacget='pacman -S'
 alias pacdel='pacman -Runs'
+
+# ROS
+indigo() {
+    source /opt/ros/indigo/setup.bash
+    export PYTHONPATH=/opt/ros/indigo/lib/python2.7/site-packages:$PYTHONPATH
+    export PKG_CONFIG_PATH="/opt/ros/indigo/lib/pkgconfig:$PKG_CONFIG_PATH"
+    # Optionally, you can set:
+    #export ROS_PACKAGE_PATH=/path/to/your/package/path:$ROS_PACKAGE_PATH
+
+    # Useful aliases
+    alias catkin_make="catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python2 -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so"
+
+    # If you use Gazebo:
+    #source /usr/share/gazebo/setup.sh
+}
