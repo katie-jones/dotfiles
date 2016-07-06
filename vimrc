@@ -105,6 +105,7 @@ let mapleader = ","
 " map ;a to ESC
 inoremap ;a <Esc>
 inoremap ;A <Esc>
+inoremap jk <Esc>
 
 " navigate windows with alt-arrow
 nnoremap f <C-w><C-L>
