@@ -12,7 +12,7 @@ alias ls='ls --color=auto'
 PS1='\[\033[0;34m\]\u \W > \[\033[00m\]'
 
 # use threading in make
-export MAKEFLAGS='-j5'
+export MAKEFLAGS='-j2'
 
 # check sudo commands for aliases
 alias sudo='sudo '
