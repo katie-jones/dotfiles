@@ -91,6 +91,10 @@ au BufNewFile,BufRead *.cls set filetype=tex
 au BufNewFile,BufRead vrapperrc set filetype=vim
 au BufNewFile,BufRead .vrapperrc set filetype=vim
 
+" cc files to cpp
+au BufNewFile,BufRead *.cc set filetype=cpp
+
+
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
 " ---------------------------------------------
@@ -101,6 +105,7 @@ let mapleader = ","
 " map ;a to ESC
 inoremap ;a <Esc>
 inoremap ;A <Esc>
+inoremap jk <Esc>
 
 " navigate windows with alt-arrow
 nnoremap f <C-w><C-L>
