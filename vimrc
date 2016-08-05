@@ -35,6 +35,8 @@ Plugin 'Valloric/YouCompleteMe' " for code completion
 Plugin 'scrooloose/nerdtree' " for directory navigation
 Plugin 'jistr/vim-nerdtree-tabs' " for using nerdtree with tabs in vim
 Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
+Plugin 'hdima/python-syntax' " python syntax highlighting
+Plugin 'hynek/vim-python-pep8-indent' " python indentation
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -94,6 +96,12 @@ au BufNewFile,BufRead .vrapperrc set filetype=vim
 " cc files to cpp
 au BufNewFile,BufRead *.cc set filetype=cpp
 
+" bash_katie to sh
+au BufNewFile,BufRead .bash_katie set filetype=sh
+
+" disable YCM for tex files
+let g:ycm_filetype_blacklist = { 'tex' : 1 }
+
 
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
@@ -105,6 +113,9 @@ let mapleader = ","
 " map ;a to ESC
 inoremap ;a <Esc>
 inoremap ;A <Esc>
+
+" map jk to ESC
+inoremap jk <ESC>
 
 " navigate windows with alt-arrow
 nnoremap f <C-w><C-L>
@@ -120,11 +131,12 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 
 " open file under cursor in new tab
-nnoremap GF <C-w>gf
-vnoremap GF <C-w>gf
+nnoremap gF <C-w>gf
+vnoremap gF <C-w>gf
 
 " remap NERD Commenter toggle command
-map .. <leader>c<SPACE>
+" map .. <plug>NERDCommenterToggle
+map .. <Leader>c<space>
 
 
 " NERDTree stuff

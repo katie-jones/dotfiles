@@ -1,0 +1,3 @@
+! Map Caps_Lock to F13
+clear lock
+keysym Caps_Lock = F13 Caps_Lock

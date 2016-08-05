@@ -20,7 +20,7 @@ map <silent> e <Plug>CamelCaseMotion_e
 map <silent> ge <Plug>CamelCaseMotion_ge
 
 " remap NERD Commenter toggle command
-map .. <leader>c<SPACE>
+" map .. <leader>c<SPACE>
 
 " set default YCM config file
 let g:ycm_global_ycm_extra_conf = '~/.ycm_conf_c.py'
