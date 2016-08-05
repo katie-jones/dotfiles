@@ -54,12 +54,19 @@ xnoremap <leader>b <Esc>`>a}<Esc>`<i\mathbf{<Esc>
 nnoremap <leader>b ciw\mathbf{<C-r>"}<Esc>
 
 " maps for vec
-vnoremap <leader>v di\vec{<C-r>"}<Esc>
-nnoremap <leader>v ciw\vec{<C-r>"}<Esc>
+vnoremap <leader>v di\vc{<C-r>"}<Esc>
+nnoremap <leader>v ciw\vc{<C-r>"}<Esc>
+" vnoremap <leader>v di\bm{<C-r>"}<Esc>
+" nnoremap <leader>v ciw\bm{<C-r>"}<Esc>
 
 " maps for text
 vnoremap <leader>t di\text{<C-r>"}<Esc>
 nnoremap <leader>t ciw\text{<C-r>"}<Esc>
+
+" maps for gls
+call IMAP(',gg', '\gls{<++>}<++>', 'tex')
+vnoremap <leader>g di\g{<C-r>"}<Esc>
+nnoremap <leader>g ciw\g{<C-r>"}<Esc>
 
 
 " map \omega
@@ -67,3 +74,6 @@ call IMAP('`w', '\omega', 'tex')
 
 " map FR to fix indentation
 nnoremap FR gg=G
+
+" map ff to compile
+nnoremap ff :w<CR>:!make<CR><CR>
