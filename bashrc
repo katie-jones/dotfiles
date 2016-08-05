@@ -14,6 +14,8 @@ PS1='\[\033[0;34m\]\u \W > \[\033[00m\]'
 # alias for common grub commands
 alias mkgrubcfg='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mkgrubsa='sudo grub-mkstandalone -o boot.efi -d /usr/lib/grub/x86_64-efi -O x86_64-efi --compress=xz /boot/grub/grub.cfg'
+alias mkgrubsa_arch='sudo grub-mkstandalone -o boot.efi -d /usr/lib/grub/x86_64-efi -O x86_64-efi --compress=xz /mnt/boot/grub/grub.cfg'
+
 
 # function for ecryptfs
 mtecrypt() {
@@ -51,9 +53,5 @@ netman_restart() {
     sudo kill $(ps aux | grep NetworkManager | head -1 | gawk '{ print $2 }')
 }
 
-# check if xmodmap has already been run, and if not run it
-x=$(xmodmap -pke | grep Caps_Lock | grep F13)
-if [[ -z "$x" ]];
-then
-    xmodmap ~/.Xmodmap
-fi
+# global latexmk rc file
+export LATEXMKRC=/usr/local/share/latexmk/latexmkrc
