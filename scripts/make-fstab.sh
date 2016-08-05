@@ -16,16 +16,17 @@ BOOT_UUID="cdfb3a53-d96f-4ea8-98f8-2559d4ae1e88"
 BACKUP_UUID="81b7995d-8d94-4467-a160-f1dcffad7f9a"
 BACKUP_HOME_UUID="3e41cb52-f707-4186-8f68-b1a2da0d8b3f"
 BACKUP_SHARED_UUID="ec4c86d1-091e-359c-b798-11b227a5650f"
+USB_UUID="7ECD-DEAD"
 
 
-UUIDS=( $ROOT_UUID $SWAP_UUID $HOME_UUID $SCHOOL_UUID $MEDIA_UUID $CLOUD_UUID $SHARED_UUID $MATLAB_UUID $MATLAB_UUID_TWO $BOOT_UUID $BACKUP_UUID $BACKUP_HOME_UUID $BACKUP_SHARED_UUID )
-MTPTS=( "/" "none" "/mnt/lhome" "/home/katie/school" "/mnt/media" "/mnt/cloud" "/mnt/shared" "/usr/local/MATLAB/R2014b" "/usr/local/MATLAB/R2009b" "/mnt/boot" "/mnt/backups/root" "/mnt/backups/home" "/mnt/backups/shared" )
-FORMATS=( "ext4" "swap" "ext4" "ext4" "exfat" "ext4" "ext4" "ext4" "ext4" "ext2" "ext4" "ext4" "hfsplus" )
-OPTIONS=( "errors=remount-ro" "sw" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,noauto" "rw,noauto" "rw,noauto" "rw,noauto" )
-CHECKS=( "0 1" "0 0" "0 2" "0 2" "0 2" "0 2" "0 2" "0 2" "0 2" "0 0" "0 0" "0 0" "0 0" )
-COMMENTS=( "root partition" "swap" "linux home partition" "school partition" "media partition" "cloud partition" "shared partition" "matlab 2014b partition" "matlab 2009b partition" "arch boot partition" "root backup partition" "home backup partition" "shared backup partition" )
+UUIDS=( $ROOT_UUID $SWAP_UUID $HOME_UUID $SCHOOL_UUID $MEDIA_UUID $CLOUD_UUID $SHARED_UUID $MATLAB_UUID $MATLAB_UUID_TWO $BOOT_UUID $BACKUP_UUID $BACKUP_HOME_UUID $BACKUP_SHARED_UUID $USB_UUID )
+MTPTS=( "/" "none" "/mnt/lhome" "/home/katie/school" "/mnt/media" "/mnt/cloud" "/mnt/shared" "/usr/local/MATLAB/R2014b" "/usr/local/MATLAB/R2009b" "/mnt/boot" "/mnt/backups/root" "/mnt/backups/home" "/mnt/backups/shared" "/mnt/usb" )
+FORMATS=( "ext4" "swap" "ext4" "ext4" "exfat" "ext4" "ext4" "ext4" "ext4" "ext2" "ext4" "ext4" "hfsplus" "exfat" )
+OPTIONS=( "errors=remount-ro" "sw" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,noauto" "rw,noauto" "rw,noauto" "rw,noauto" "rw,noauto,user" )
+CHECKS=( "0 1" "0 0" "0 2" "0 2" "0 2" "0 2" "0 2" "0 2" "0 2" "0 0" "0 0" "0 0" "0 0" "0 0" )
+COMMENTS=( "root partition" "swap" "linux home partition" "school partition" "media partition" "cloud partition" "shared partition" "matlab 2014b partition" "matlab 2009b partition" "arch boot partition" "root backup partition" "home backup partition" "shared backup partition" "usb drive" )
 
-n=13
+n=14
 
 printf "# Begin /etc/fstab\n\n"
 
