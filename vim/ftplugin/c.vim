@@ -26,5 +26,5 @@ map .. <leader>c<SPACE>
 let g:ycm_global_ycm_extra_conf = '~/.ycm_conf_c.py'
 
 " visual/normal mode map to make header guard
-vnoremap hd dggi#ifndef <Esc>po#define <Esc>pGo<Return>#endif<Esc>k
-nnoremap hd 0d$ggi#ifndef <Esc>po#define <Esc>pGo<Return>#endif<Esc>k
+vnoremap HD dggi#ifndef <Esc>po#define <Esc>pGo<Return>#endif<Esc>k
+nnoremap HD 0d$ggi#ifndef <Esc>po#define <Esc>pGo<Return>#endif<Esc>k

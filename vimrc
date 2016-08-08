@@ -121,8 +121,8 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 
 " open file under cursor in new tab
-nnoremap GF <C-w>gf
-vnoremap GF <C-w>gf
+nnoremap gF <C-w>gf
+vnoremap gF <C-w>gf
 
 " remap NERD Commenter toggle command
 map .. <leader>c<SPACE>
