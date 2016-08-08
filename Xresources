@@ -3,17 +3,19 @@
 !----------------------------------
 
 ! solarized
-#include ".Xresources.d/solarized.light"
+#include ".Xresources.d/solarized.dark"
 URxvt.intensityStyles: 0
 
 ! no scroll bar
 URxvt.scrollBar: 0
 
 ! perl
-URxvt.perl-ext-common: tabbed,clipboard,url-select,keyboard-select,fullscreen,resize-font
-URxvt.ur-select.launcher: opera
+URxvt.perl-ext-common: tabbedex,clipboard,url-select,keyboard-select,fullscreen,resize-font
+URxvt.ur-select.launcher: chromium
 URxvt.url-select.underline: true
 
+! tabs
+URxvt.tabbed.autohide: true
 
 ! Font
 URxvt.font: xft:inconsolata:size=14
@@ -28,3 +30,8 @@ URxvt.resize-font.reset: C-equal
 URxvt*iso14755: false
 URxvt*iso14755_52: false
 
+! Add urxvt icon
+URxvt.iconFile: /usr/share/icons/deepin/apps/scalable/terminator.svg
+
+sleep 10
+source ~/.Xresources.d/50-synaptics.conf
