@@ -6,3 +6,6 @@ vim/bundle
 
 # ignore python compiled files
 *.pyc
+
+# ignore vim swp files
+*.swp

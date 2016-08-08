@@ -113,6 +113,7 @@ let mapleader = ","
 " map ;a to ESC
 inoremap ;a <Esc>
 inoremap ;A <Esc>
+inoremap jk <Esc>
 
 " map jk to ESC
 inoremap jk <ESC>
