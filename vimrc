@@ -146,6 +146,9 @@ map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " write as sudo
 cnoremap w!! w !sudo tee % >/dev/null
 
+" Delete trailing whitespace
+command DeleteWhitespace %s/\s\+$//g
+
 
 " ---------------------------------------------
 " --------------- LATEX SUITE -----------------
