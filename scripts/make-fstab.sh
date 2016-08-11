@@ -3,7 +3,7 @@
 
 FORMAT="%-46s\t%-24s\t%-13s\t%-18s\t%-2s\t%-2s\n" # printf format
 
-ROOT_UUID=""
+ROOT_UUID="d957d314-2629-418d-b1e5-64bc78d03a64"
 SWAP_UUID="01098383-d26f-4fc3-a570-2fa65f767a0c"
 HOME_UUID="176525c7-1bf1-425d-9745-e4ec860a4b0c"
 SCHOOL_UUID="012013ff-ff66-4904-92e7-7a81a30a5a2a"
