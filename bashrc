@@ -18,7 +18,7 @@ export MAKEFLAGS='-j2'
 alias sudo='sudo '
 
 # alias for common grub commands
-alias mkgrubcfg='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias mkgrubcfgfile='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mkgrubsa='sudo grub-mkstandalone -o boot.efi -d /usr/lib/grub/x86_64-efi -O x86_64-efi --compress=xz /boot/grub/grub.cfg'
 
 # function for ecryptfs
@@ -26,6 +26,16 @@ mtecrypt() {
     ecryptfs-insert-wrapped-passphrase-into-keyring /home/katie/.ecryptfs/wrapped-passphrase
     mount -i /home/katie/important
 }
+
+mkgrubcfg() {
+    cp /mnt/shared/bootfiles/boot.efi /mnt/shared/bootfiles/boot.efi.old
+    mkgrubcfgfile && \
+    mkgrubsa && \
+    sudo mount UUID=b801a995-2e0b-3440-bb4a-cacccb9e233c /mnt/efi && \
+    sudo cp -v /mnt/shared/bootfiles/boot.efi /mnt/efi/System/Library/CoreServices/ &&
+    sudo umount /mnt/efi
+}
+
 
 export EDITOR=vim
 
