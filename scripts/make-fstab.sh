@@ -3,7 +3,7 @@
 
 FORMAT="%-46s\t%-24s\t%-13s\t%-18s\t%-2s\t%-2s\n" # printf format
 
-ROOT_UUID="d957d314-2629-418d-b1e5-64bc78d03a64"
+ROOT_UUID=""
 SWAP_UUID="01098383-d26f-4fc3-a570-2fa65f767a0c"
 HOME_UUID="176525c7-1bf1-425d-9745-e4ec860a4b0c"
 SCHOOL_UUID="012013ff-ff66-4904-92e7-7a81a30a5a2a"
@@ -19,12 +19,101 @@ BACKUP_SHARED_UUID="ec4c86d1-091e-359c-b798-11b227a5650f"
 USB_UUID="7ECD-DEAD"
 
 
-UUIDS=( $ROOT_UUID $SWAP_UUID $HOME_UUID $SCHOOL_UUID $MEDIA_UUID $CLOUD_UUID $SHARED_UUID $MATLAB_UUID $MATLAB_UUID_TWO $BOOT_UUID $BACKUP_UUID $BACKUP_HOME_UUID $BACKUP_SHARED_UUID $USB_UUID )
-MTPTS=( "/" "none" "/mnt/lhome" "/home/katie/school" "/mnt/media" "/mnt/cloud" "/mnt/shared" "/usr/local/MATLAB/R2014b" "/usr/local/MATLAB/R2009b" "/mnt/boot" "/mnt/backups/root" "/mnt/backups/home" "/mnt/backups/shared" "/mnt/usb" )
-FORMATS=( "ext4" "swap" "ext4" "ext4" "exfat" "ext4" "ext4" "ext4" "ext4" "ext2" "ext4" "ext4" "hfsplus" "exfat" )
-OPTIONS=( "errors=remount-ro" "sw" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,exec,auto" "rw,noauto" "rw,noauto" "rw,noauto" "rw,noauto" "rw,noauto,user" )
-CHECKS=( "0 1" "0 0" "0 2" "0 2" "0 2" "0 2" "0 2" "0 2" "0 2" "0 0" "0 0" "0 0" "0 0" "0 0" )
-COMMENTS=( "root partition" "swap" "linux home partition" "school partition" "media partition" "cloud partition" "shared partition" "matlab 2014b partition" "matlab 2009b partition" "arch boot partition" "root backup partition" "home backup partition" "shared backup partition" "usb drive" )
+UUIDS=(
+$ROOT_UUID
+$SWAP_UUID
+$HOME_UUID
+$SCHOOL_UUID
+$MEDIA_UUID
+$CLOUD_UUID
+$SHARED_UUID
+$MATLAB_UUID
+$MATLAB_UUID_TWO
+$BOOT_UUID
+$BACKUP_UUID
+$BACKUP_HOME_UUID
+$BACKUP_SHARED_UUID
+$USB_UUID )
+
+MTPTS=(
+"/"
+"none"
+"/home"
+"/home/katie/school"
+"/mnt/media"
+"/mnt/cloud"
+"/mnt/shared"
+"/usr/local/MATLAB/R2014b"
+"/usr/local/MATLAB/R2009b"
+"/boot"
+"/mnt/backups/root"
+"/mnt/backups/home"
+"/mnt/backups/shared"
+"/mnt/usb" )
+
+FORMATS=(
+"ext4"
+"swap"
+"ext4"
+"ext4"
+"exfat"
+"ext4"
+"ext4"
+"ext4"
+"ext4"
+"ext2"
+"ext4"
+"ext4"
+"hfsplus"
+"exfat" )
+
+OPTIONS=(
+"errors=remount-ro"
+"sw"
+"rw,exec,auto"
+"rw,exec,auto"
+"rw,exec,auto"
+"rw,exec,auto"
+"rw,exec,auto"
+"rw,exec,auto"
+"rw,exec,auto"
+"rw,auto"
+"rw,noauto"
+"rw,noauto"
+"rw,noauto"
+"user,noexec,noauto" )
+
+CHECKS=(
+"0 2"
+"0 0"
+"0 2"
+"0 2"
+"0 2"
+"0 2"
+"0 2"
+"0 2"
+"0 2"
+"0 1"
+"0 0"
+"0 0"
+"0 0"
+"0 0" )
+
+COMMENTS=(
+"root partition"
+"swap"
+"linux home partition"
+"school partition"
+"media partition"
+"cloud partition"
+"shared partition"
+"matlab 2014b partition"
+"matlab 2009b partition"
+"arch partition"
+"root backup partition"
+"home backup partition"
+"shared backup partition"
+"usb drive" )
 
 n=14
 
