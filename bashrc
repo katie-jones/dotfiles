@@ -53,3 +53,9 @@ export PATH=$PATH:$MATLABPATH
 
 # visual bell
 set bell-style visible
+
+# alias for pacman commands
+alias pacup='pacman -Suy'
+alias pacget='pacman -S'
+alias pacdel='pacman -Runs'
+
