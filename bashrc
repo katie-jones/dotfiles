@@ -9,7 +9,6 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 # change bash prompt
-# PS1='\[\e[0;34m\]\u \W > \[\e[0m\]'
 PS1='\[\033[0;34m\]\u \W > \[\033[00m\]'
 
 # use threading in make

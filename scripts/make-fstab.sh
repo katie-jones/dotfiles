@@ -17,6 +17,7 @@ BACKUP_UUID="81b7995d-8d94-4467-a160-f1dcffad7f9a"
 BACKUP_HOME_UUID="3e41cb52-f707-4186-8f68-b1a2da0d8b3f"
 BACKUP_SHARED_UUID="ec4c86d1-091e-359c-b798-11b227a5650f"
 USB_UUID="7ECD-DEAD"
+BOOTLOADER_UUID="08664667-0759-3ac0-b2db-37feccc90e47"
 
 
 UUIDS=(
@@ -33,7 +34,9 @@ $BOOT_UUID
 $BACKUP_UUID
 $BACKUP_HOME_UUID
 $BACKUP_SHARED_UUID
-$USB_UUID )
+$USB_UUID
+$BOOTLOADER_UUID
+)
 
 MTPTS=(
 "/"
@@ -49,7 +52,9 @@ MTPTS=(
 "/mnt/backups/root"
 "/mnt/backups/home"
 "/mnt/backups/shared"
-"/mnt/usb" )
+"/mnt/usb"
+"/mnt/efi"
+)
 
 FORMATS=(
 "ext4"
@@ -65,7 +70,9 @@ FORMATS=(
 "ext4"
 "ext4"
 "hfsplus"
-"exfat" )
+"exfat"
+"hfsplus"
+)
 
 OPTIONS=(
 "errors=remount-ro"
@@ -81,7 +88,9 @@ OPTIONS=(
 "rw,noauto"
 "rw,noauto"
 "rw,noauto"
-"user,noexec,noauto" )
+"user,noexec,noauto"
+"rw,noauto"
+)
 
 CHECKS=(
 "0 2"
@@ -97,7 +106,9 @@ CHECKS=(
 "0 0"
 "0 0"
 "0 0"
-"0 0" )
+"0 0"
+"0 0"
+)
 
 COMMENTS=(
 "root partition"
@@ -113,9 +124,11 @@ COMMENTS=(
 "root backup partition"
 "home backup partition"
 "shared backup partition"
-"usb drive" )
+"usb drive"
+"linux bootloader partition"
+)
 
-n=14
+n=15
 
 printf "# Begin /etc/fstab\n\n"
 
