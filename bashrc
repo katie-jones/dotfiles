@@ -59,3 +59,5 @@ alias pacup='pacman -Suy'
 alias pacget='pacman -S'
 alias pacdel='pacman -Runs'
 
+# alias to open pdfs
+alias opdf='ds qpdfview'
