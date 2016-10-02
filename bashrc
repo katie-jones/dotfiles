@@ -31,7 +31,7 @@ mkgrubcfg() {
     cp /mnt/shared/bootfiles/boot.efi /mnt/shared/bootfiles/boot.efi.old
     mkgrubcfgfile && \
     mkgrubsa && \
-    sudo mount UUID=b801a995-2e0b-3440-bb4a-cacccb9e233c /mnt/efi && \
+    sudo mount /mnt/efi && \
     sudo cp -v /mnt/shared/bootfiles/boot.efi /mnt/efi/System/Library/CoreServices/ &&
     sudo umount /mnt/efi
 }
