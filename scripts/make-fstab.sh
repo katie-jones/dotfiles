@@ -13,9 +13,10 @@ SHARED_UUID="47a4ee95-9221-4e37-850f-1c515365a3a9"
 MATLAB_UUID="ac479f9d-78d7-4066-b03a-86945c253d12"
 MATLAB_UUID_TWO="e2620e77-ce61-4d93-8daa-4cf41056883d"
 BOOT_UUID="cdfb3a53-d96f-4ea8-98f8-2559d4ae1e88"
-BACKUP_UUID="81b7995d-8d94-4467-a160-f1dcffad7f9a"
+BACKUP_UUID="b60d83ea-e547-47f3-95da-7ef63bdb02c2"
 BACKUP_HOME_UUID="3e41cb52-f707-4186-8f68-b1a2da0d8b3f"
-BACKUP_SHARED_UUID="ec4c86d1-091e-359c-b798-11b227a5650f"
+BACKUP_SHARED_UUID="65f48282-7e11-43d8-b962-dc34bd27d5be"
+BACKUP_MEDIA_UUID="8635b56c-bdb3-4591-a4ba-efadc392e638"
 USB_UUID="7ECD-DEAD"
 BOOTLOADER_UUID="08664667-0759-3ac0-b2db-37feccc90e47"
 
@@ -34,6 +35,7 @@ $BOOT_UUID
 $BACKUP_UUID
 $BACKUP_HOME_UUID
 $BACKUP_SHARED_UUID
+$BACKUP_MEDIA_UUID
 $USB_UUID
 $BOOTLOADER_UUID
 )
@@ -52,6 +54,7 @@ MTPTS=(
 "/mnt/backups/root"
 "/mnt/backups/home"
 "/mnt/backups/shared"
+"/mnt/backups/media"
 "/mnt/usb"
 "/mnt/efi"
 )
@@ -69,7 +72,8 @@ FORMATS=(
 "ext2"
 "ext4"
 "ext4"
-"hfsplus"
+"ext4"
+"ext4"
 "exfat"
 "hfsplus"
 )
@@ -85,6 +89,7 @@ OPTIONS=(
 "rw,exec,auto"
 "rw,exec,auto"
 "rw,auto"
+"rw,noauto"
 "rw,noauto"
 "rw,noauto"
 "rw,noauto"
@@ -108,6 +113,7 @@ CHECKS=(
 "0 0"
 "0 0"
 "0 0"
+"0 0"
 )
 
 COMMENTS=(
@@ -124,11 +130,12 @@ COMMENTS=(
 "root backup partition"
 "home backup partition"
 "shared backup partition"
+"media backup partition"
 "usb drive"
 "linux bootloader partition"
 )
 
-n=15
+n=16
 
 printf "# Begin /etc/fstab\n\n"
 
