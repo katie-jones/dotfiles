@@ -58,6 +58,10 @@ set splitright
 " set leader to ,
 let mapleader = ","
 
+" highlight long lines
+highlight ColorColumn ctermbg=blue guibg=blue
+call matchadd('ColorColumn', '\%80v', 100)
+
 " ---------------------------------------------
 " ----------------- NERD SHIT -----------------
 " ---------------------------------------------
@@ -74,7 +78,6 @@ map <leader>, <plug>NERDCommenterToggle
 
 " NERDTree stuff
 map <leader>n <plug>NERDTreeTabsToggle<CR>
-
 
 " ---------------------------------------------
 " ----------------- YCM SHIT ------------------
@@ -104,7 +107,6 @@ let g:templates_global_name_prefix = 'template'
 
 " No default templates
 let g:template_no_builtin_template = 1
-
 
 " ---------------------------------------------
 " ---------------- FILE TYPES -----------------
