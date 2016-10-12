@@ -11,3 +11,4 @@
 *.swp
 /var/cache/*
 /usr/local/MATLAB
+/usr/local/texlive
