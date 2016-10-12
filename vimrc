@@ -1,30 +1,16 @@
+" ---------------------------------------------
+" ------------------ VUNDLE -------------------
+" ---------------------------------------------
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'darfink/vim-plist' " edit plist files in vim
 Plugin 'rhysd/vim-clang-format' "use clang-format in vim
@@ -38,31 +24,21 @@ Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
 Plugin 'hdima/python-syntax' " python syntax highlighting
 Plugin 'hynek/vim-python-pep8-indent' " python indentation
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" see :h vundle for more details or wiki for FAQ
+call vundle#end()
+filetype plugin indent on
+
+" ---------------------------------------------
+" ---------------- BASIC SETUP ----------------
+" ---------------------------------------------
 
 syntax enable
 set background=light
 colorscheme solarized
 set vb
-
 set spell spelllang=en_us
 
 " Toggle between light/dark color schemes
 call togglebg#map("<F5>")
-
-" YouCompleteMe shit
-let g:EclimCompletionMethod = 'omnifunc'
 
 " line numbering
 set number
@@ -76,11 +52,44 @@ set nolist
 set splitbelow
 set splitright
 
+" highlight long lines
+highlight ColorColumn ctermbg=blue guibg=blue
+call matchadd('ColorColumn', '\%80v', 100)
+
+" ---------------------------------------------
+" ----------------- NERD SHIT -----------------
+" ---------------------------------------------
+
 " // comments
-let g:NERDCustomDelimiters = {'c': { 'leftAlt': '/*', 'rightAlt': '*/', 'left': '//'}}
+let g:NERDCustomDelimiters = {'c': { 'leftAlt': '/*', 'rightAlt': '*/', 'left':
+			\ '//'}}
 
 " spaces before comments
 let g:NERDSpaceDelims=1
+
+" remap NERD Commenter toggle command
+map .. <plug>NERDCommenterToggle
+
+" NERDTree stuff
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+
+" ---------------------------------------------
+" ----------------- YCM SHIT ------------------
+" ---------------------------------------------
+
+" Eclim config
+let g:EclimCompletionMethod = 'omnifunc'
+
+" close preview window
+let g:ycm_autoclose_preview_window_after_completion=1
+
+" shortcut to go to item definition
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" disable YCM for tex files
+let g:ycm_filetype_blacklist = { 'tex' : 1 }
+
 
 " ---------------------------------------------
 " ---------------- FILE TYPES -----------------
@@ -99,9 +108,6 @@ au BufNewFile,BufRead *.cc set filetype=cpp
 " bash_katie to sh
 au BufNewFile,BufRead .bash_katie set filetype=sh
 
-" disable YCM for tex files
-let g:ycm_filetype_blacklist = { 'tex' : 1 }
-
 
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
@@ -113,10 +119,10 @@ let mapleader = ","
 " map ;a to ESC
 inoremap ;a <Esc>
 inoremap ;A <Esc>
-inoremap jk <Esc>
 
 " map jk to ESC
 inoremap jk <ESC>
+inoremap JK <ESC>
 
 " navigate windows with alt-arrow
 nnoremap f <C-w><C-L>
@@ -135,24 +141,26 @@ nnoremap <C-h> <C-w><C-h>
 nnoremap gF <C-w>gf
 vnoremap gF <C-w>gf
 
-" remap NERD Commenter toggle command
-" map .. <plug>NERDCommenterToggle
-map .. <Leader>c<space>
-
-
-" NERDTree stuff
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
-
 " write as sudo
 cnoremap w!! w !sudo tee % >/dev/null
 
 " Delete trailing whitespace
 command DeleteWhitespace %s/\s\+$//g
+nnoremap <Leader>dw :DeleteWhitespace<CR>
+
+" insert a new line without entering insert mode
+nnoremap <S-CR> O<Esc>j
+nnoremap <CR> o<Esc>k
+
+" code folding
+set foldmethod=indent
+nnoremap <space> za
+vnoremap <space> zf
 
 
 " ---------------------------------------------
 " --------------- LATEX SUITE -----------------
-" --------------------------------------------- 
+" ---------------------------------------------
 
 " change grep to generate file name for Latex-Suite
 set grepprg=grep\ -nH\ $*
