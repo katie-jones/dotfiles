@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script to make backups of root and home directories
-# Input: "home" and/or "full"
+# Input: "home" and/or "full" and/or "shared" and/or "media"
 # Options: 
 #   -f: Run backup without checking if the last backup is outdated
 #
@@ -48,6 +48,31 @@ set_full_vars() {
     delta_seconds=604800 # frequency of full backups in seconds
 }
 
+# Variables specific to shared backups
+set_shared_vars() {
+    mount_point=/mnt/backups/shared # where backup drive is mounted
+    backup_folder=/mnt/backups/shared # root folder holding backups
+    to_backup=/mnt/shared/ # folder to backup -- should start and end with a /
+    excludes=/home/katie/.shared_excludes # file with stuff to exclude
+    logfile=/var/log/backups/shared.log # file to send output and rsync logs to
+    errfile=/var/log/backups/shared.err # file to send errors to
+    link_name=current # name of symlink in $backup_folder pointing to latest full backups
+    folder_prefix=shared- # prefix of full backup folders
+    delta_seconds=604800 # frequency of full backups in seconds
+}
+
+# Variables specific to media backups
+set_media_vars() {
+    mount_point=/mnt/backups/media # where backup drive is mounted
+    backup_folder=/mnt/backups/media # root folder holding backups
+    to_backup=/mnt/media/ # folder to backup -- should start and end with a /
+    excludes=/home/katie/.media_excludes # file with stuff to exclude
+    logfile=/var/log/backups/media.log # file to send output and rsync logs to
+    errfile=/var/log/backups/media.err # file to send errors to
+    link_name=current # name of symlink in $backup_folder pointing to latest full backups
+    folder_prefix=media- # prefix of full backup folders
+    delta_seconds=604800 # frequency of full backups in seconds
+}
 
 
 
@@ -69,6 +94,12 @@ main() {
                 ;;
             "full")
                 set_full_vars
+                ;;
+            "shared")
+                set_shared_vars
+                ;;
+            "media")
+                set_media_vars
                 ;;
             "-f") # force option -- don't test timestamps
                 test_times=
