@@ -76,4 +76,4 @@ call IMAP('`w', '\omega', 'tex')
 nnoremap FR gg=G
 
 " map ff to compile
-nnoremap ff :w<CR>:!make<CR><CR>
+nnoremap ff :w<CR>:!latexmk -pdf<CR><CR>
