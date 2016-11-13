@@ -71,8 +71,13 @@ export EDITOR=vim
 
 # export gopath
 export GOPATH=$HOME/gopath
-
 export PATH=$GOPATH:$GOPATH/bin:$PATH
+
+# latex path
+export LATEXPATH=/usr/local/texlive/2016/bin/x86_64-linux
+export PATH=$LATEXPATH:$PATH
+export MANPATH=/usr/local/texlive/2016/texmf-dist/doc/man:$MANPATH
+export INFOPATH=/usr/local/texlive/2016/texmf-dist/doc/info:$INFOPATH
 
 # Solarized colors in console
 source ~/linux-config/custom-config/solarized_dark
