@@ -9,34 +9,21 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized' " color scheme
 Plugin 'darfink/vim-plist' " edit plist files in vim
 Plugin 'rhysd/vim-clang-format' "use clang-format in vim
 Plugin 'bkad/CamelCaseMotion' " move using camel case
-Plugin 'scrooloose/nerdcommenter' " comment using <leader> ci
+Plugin 'scrooloose/nerdcommenter' " kbd shortcuts for commenting
 Plugin 'tmux-plugins/vim-tmux' " for tmux conf file
 Plugin 'Valloric/YouCompleteMe' " for code completion
 Plugin 'scrooloose/nerdtree' " for directory navigation
 Plugin 'jistr/vim-nerdtree-tabs' " for using nerdtree with tabs in vim
 Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
-Plugin 'hdima/python-syntax' " python syntax highlighting
-Plugin 'hynek/vim-python-pep8-indent' " python indentation
+Plugin 'scrooloose/syntastic' " syntax highlighting
+Plugin 'nvie/vim-flake8' " PEP 8 syntax highlighting
+Plugin 'tmhedberg/SimpylFold' " python code folding
+Plugin 'vim-scripts/indentpython.vim' " python indentation
+" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'} " status bar
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
