@@ -1,3 +1,7 @@
+" ---------------------------------------------
+" ------------------ VUNDLE -------------------
+" ---------------------------------------------
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -22,21 +26,21 @@ Plugin 'tmhedberg/SimpylFold' " python code folding
 Plugin 'vim-scripts/indentpython.vim' " python indentation
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'} " status bar
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()
+filetype plugin indent on
+
+" ---------------------------------------------
+" ---------------- BASIC SETUP ----------------
+" ---------------------------------------------
 
 syntax enable
 set background=light
 colorscheme solarized
 set vb
-
 set spell spelllang=en_us
 
 " Toggle between light/dark color schemes
 call togglebg#map("<F5>")
-
-" YouCompleteMe shit
-let g:EclimCompletionMethod = 'omnifunc'
 
 " line numbering
 set number
@@ -50,11 +54,40 @@ set nolist
 set splitbelow
 set splitright
 
+" ---------------------------------------------
+" ----------------- NERD SHIT -----------------
+" ---------------------------------------------
+
 " // comments
-let g:NERDCustomDelimiters = {'c': { 'leftAlt': '/*', 'rightAlt': '*/', 'left': '//'}}
+let g:NERDCustomDelimiters = {'c': { 'leftAlt': '/*', 'rightAlt': '*/', 'left':
+			\ '//'}}
 
 " spaces before comments
 let g:NERDSpaceDelims=1
+
+" remap NERD Commenter toggle command
+map .. <plug>NERDCommenterToggle
+
+" NERDTree stuff
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+
+" ---------------------------------------------
+" ----------------- YCM SHIT ------------------
+" ---------------------------------------------
+
+" Eclim config
+let g:EclimCompletionMethod = 'omnifunc'
+
+" close preview window
+let g:ycm_autoclose_preview_window_after_completion=1
+
+" shortcut to go to item definition
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" disable YCM for tex files
+let g:ycm_filetype_blacklist = { 'tex' : 1 }
+
 
 " ---------------------------------------------
 " ---------------- FILE TYPES -----------------
@@ -73,9 +106,6 @@ au BufNewFile,BufRead *.cc set filetype=cpp
 " bash_katie to sh
 au BufNewFile,BufRead .bash_katie set filetype=sh
 
-" disable YCM for tex files
-let g:ycm_filetype_blacklist = { 'tex' : 1 }
-
 
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
@@ -85,12 +115,12 @@ let g:ycm_filetype_blacklist = { 'tex' : 1 }
 let mapleader = ","
 
 " map ;a to ESC
-inoremap ;a <Esc>
+inoremap ;a <ESC>
 inoremap ;A <Esc>
 
 " map jk to ESC
 inoremap jk <ESC>
-inoremap JK <Esc>
+inoremap JK <ESC>
 
 " navigate windows with JKLH
 nnoremap J <C-w><C-j>
@@ -109,14 +139,6 @@ nnoremap <C-h> <C-w><C-h>
 nnoremap gF <C-w>gf
 vnoremap gF <C-w>gf
 
-" remap NERD Commenter toggle command
-" map .. <plug>NERDCommenterToggle
-map .. <Leader>c<space>
-
-
-" NERDTree stuff
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
-
 " write as sudo
 cnoremap w!! w !sudo tee % >/dev/null
 
@@ -132,7 +154,6 @@ nnoremap <CR> o<Esc>k
 set foldmethod=indent
 nnoremap <space> za
 vnoremap <space> zf
-
 
 
 " ---------------------------------------------
