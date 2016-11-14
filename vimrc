@@ -54,6 +54,9 @@ set nolist
 set splitbelow
 set splitright
 
+" set leader to ,
+let mapleader = ","
+
 " ---------------------------------------------
 " ----------------- NERD SHIT -----------------
 " ---------------------------------------------
@@ -66,10 +69,10 @@ let g:NERDCustomDelimiters = {'c': { 'leftAlt': '/*', 'rightAlt': '*/', 'left':
 let g:NERDSpaceDelims=1
 
 " remap NERD Commenter toggle command
-map .. <plug>NERDCommenterToggle
+map <leader>, <plug>NERDCommenterToggle
 
 " NERDTree stuff
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+map <leader>n <plug>NERDTreeTabsToggle<CR>
 
 
 " ---------------------------------------------
@@ -110,9 +113,6 @@ au BufNewFile,BufRead .bash_katie set filetype=sh
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
 " ---------------------------------------------
-
-" set leader to ,
-let mapleader = ","
 
 " map ;a to ESC
 inoremap ;a <ESC>
