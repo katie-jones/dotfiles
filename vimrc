@@ -25,6 +25,7 @@ Plugin 'nvie/vim-flake8' " PEP 8 syntax highlighting
 Plugin 'tmhedberg/SimpylFold' " python code folding
 Plugin 'vim-scripts/indentpython.vim' " python indentation
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'} " status bar
+Plugin 'aperezdc/vim-template' " template files
 
 call vundle#end()
 filetype plugin indent on
@@ -90,6 +91,19 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " disable YCM for tex files
 let g:ycm_filetype_blacklist = { 'tex' : 1 }
+
+" ---------------------------------------------
+" --------------- TEMPLATE SHIT ---------------
+" ---------------------------------------------
+
+" Global templates directory
+let g:templates_directory = '/home/katie/.vim/templates'
+
+" Template filename prefix
+let g:templates_global_name_prefix = 'template'
+
+" No default templates
+let g:template_no_builtin_template = 1
 
 
 " ---------------------------------------------
