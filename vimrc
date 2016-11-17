@@ -128,6 +128,9 @@ au BufNewFile,BufRead .bash_katie set filetype=sh
 " --------------- KEY MAPPINGS ----------------
 " ---------------------------------------------
 
+" map join lines to M
+nnoremap M J
+
 " map ;a to ESC
 inoremap ;a <ESC>
 inoremap ;A <Esc>
