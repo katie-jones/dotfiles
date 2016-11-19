@@ -85,6 +85,11 @@ if [ -f /home/katie/Downloads/google-cloud-sdk/path.bash.inc ]; then
   source '/home/katie/Downloads/google-cloud-sdk/path.bash.inc'
 fi
 
+# alias for pacman commands
+alias pacup='pacman -Suy'
+alias pacget='pacman -S'
+alias pacdel='pacman -Runs'
+
 # The next line enables shell command completion for gcloud.
 if [ -f /home/katie/Downloads/google-cloud-sdk/completion.bash.inc ]; then
   source '/home/katie/Downloads/google-cloud-sdk/completion.bash.inc'
