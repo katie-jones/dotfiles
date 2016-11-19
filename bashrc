@@ -18,20 +18,6 @@ export MAKEFLAGS='-j2'
 # check sudo commands for aliases
 alias sudo='sudo '
 
-# alias for common grub commands
-alias mkgrubcfgfile='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias mkgrubsa='sudo grub-mkstandalone -o /mnt/shared/bootfiles/boot.efi -d /usr/lib/grub/x86_64-efi -O x86_64-efi --compress=xz /boot/grub/grub.cfg'
-
-mkgrubcfg() {
-    cp /mnt/shared/bootfiles/boot.efi /mnt/shared/bootfiles/boot.efi.old
-    mkgrubcfgfile && \
-    mkgrubsa && \
-    sudo mount /mnt/efi && \
-    sudo cp -v /mnt/shared/bootfiles/boot.efi /mnt/efi/System/Library/CoreServices/ &&
-    sudo umount /mnt/efi
-}
-
-
 export EDITOR=vim
 
 # export gopath
