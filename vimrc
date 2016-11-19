@@ -74,10 +74,10 @@ let g:NERDCustomDelimiters = {'c': { 'leftAlt': '/*', 'rightAlt': '*/', 'left':
 let g:NERDSpaceDelims=1
 
 " remap NERD Commenter toggle command
-map <leader>, <plug>NERDCommenterToggle
+map <Leader>, <plug>NERDCommenterToggle
 
 " NERDTree stuff
-map <leader>n <plug>NERDTreeTabsToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 " ---------------------------------------------
 " ----------------- YCM SHIT ------------------
@@ -90,7 +90,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 let g:ycm_autoclose_preview_window_after_completion=1
 
 " shortcut to go to item definition
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <Leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " disable YCM for tex files
 let g:ycm_filetype_blacklist = { 'tex' : 1 }
