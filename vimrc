@@ -147,13 +147,6 @@ nnoremap K <C-w><C-k>
 nnoremap L <C-w><C-l>
 nnoremap H <C-w><C-h>
 
-" navigate windows with ctrl-j/k/h/l
-nnoremap <C-j> <C-w><C-j>
-nnoremap <C-n> <C-w><C-j>
-nnoremap <C-k> <C-w><C-k>
-nnoremap <C-l> <C-w><C-l>
-nnoremap <C-h> <C-w><C-h>
-
 " open file under cursor in new tab
 nnoremap gF <C-w>gf
 vnoremap gF <C-w>gf
