@@ -108,6 +108,9 @@ let g:templates_global_name_prefix = 'template'
 " No default templates
 let g:template_no_builtin_template = 1
 
+" Default username
+let g:username = 'Katie Jones'
+
 " ---------------------------------------------
 " ---------------- FILE TYPES -----------------
 " ---------------------------------------------
