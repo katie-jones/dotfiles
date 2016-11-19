@@ -22,38 +22,6 @@ alias sudo='sudo '
 alias mkgrubcfgfile='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mkgrubsa='sudo grub-mkstandalone -o /mnt/shared/bootfiles/boot.efi -d /usr/lib/grub/x86_64-efi -O x86_64-efi --compress=xz /boot/grub/grub.cfg'
 
-# function for ecryptfs
-mtecrypt() {
-    ecryptfs-insert-wrapped-passphrase-into-keyring /home/katie/.ecryptfs/wrapped-passphrase
-    mount -i /home/katie/important
-}
-
-getpassword() {
-    mounted=
-    [ -e $HOME/important/pw/sprd ] || mtecrypt && mounted=1
-    pw=$(gawk -v arg="$1" 'index($0,arg) { print $2 }' $HOME/important/pw/sprd)
-    [ -n "$pw" ] \
-    && { \
-        echo "$pw" | xclip -sel clipboard; \
-        echo "Password copied!"; } \
-    || { \
-        echo "Password for $1 not found..."; }
-    [ -z "$mounted" ] && umount $HOME/important
-}
-
-getquestion() {
-    mounted=
-    [ -e $HOME/important/pw/qus ] || mtecrypt && mounted=1
-    pw=$(gawk -v arg="$1" 'index($0,arg) { print $NF }' $HOME/important/pw/qus)
-    [ -n "$pw" ] \
-    && { \
-        echo "$pw" | xclip -sel clipboard; \
-        echo "Answer copied!"; } \
-    || { \
-        echo "Answer for $1 not found..."; }
-    [ -z "$mounted" ] && umount $HOME/important
-}
-
 mkgrubcfg() {
     cp /mnt/shared/bootfiles/boot.efi /mnt/shared/bootfiles/boot.efi.old
     mkgrubcfgfile && \
