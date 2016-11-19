@@ -1,0 +1,8 @@
+#!/bin/bash
+[ -z "$1" ] && { echo "Hostname must be provided."; exit 1; } || { hostname="$1"; }
+[ -z "$2" ] && port=443 || port="$2"
+[ -z "$3" ] && trust_cert_file_location=`curl-config --ca` || trust_cert_file_location="$3"
+
+echo "Hostname: $hostname, Port: $port"
+
+sudo bash -c "echo -n | openssl s_client -showcerts -connect $hostname:$port 2>/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | tee $trust_cert_file_location"
