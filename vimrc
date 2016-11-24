@@ -114,6 +114,9 @@ let g:template_no_builtin_template = 1
 " Default username
 let g:username = 'Katie Jones'
 
+" Default email address
+let g:email = 'katie.jones@reactive-robotics.com'
+
 " ---------------------------------------------
 " -------------- ULTISNIPS SHIT ---------------
 " ---------------------------------------------
