@@ -26,6 +26,7 @@ Plugin 'tmhedberg/SimpylFold' " python code folding
 Plugin 'vim-scripts/indentpython.vim' " python indentation
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'} " status bar
 Plugin 'aperezdc/vim-template' " template files
+Plugin 'vim-scripts/DoxygenToolkit.vim' " doxygen shortcuts
 
 call vundle#end()
 filetype plugin indent on
