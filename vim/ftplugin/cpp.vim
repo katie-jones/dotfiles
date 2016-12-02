@@ -18,3 +18,6 @@ map <silent> ge <Plug>CamelCaseMotion_ge
 " set default YCM config file
 let g:ycm_global_ycm_extra_conf = '~/.ycm_conf_cpp.py'
 
+" Fold code based on markers
+set foldmethod=expr
+
