@@ -1,3 +1,8 @@
+" Quite if filetype isn't C (i.e. C++)
+if (&ft != 'c')
+  finish
+endif
+
 " color 80th column to know when to linebreak
 set colorcolumn=80
 
