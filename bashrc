@@ -44,3 +44,11 @@ fi
 if [ -f /home/katie/Downloads/google-cloud-sdk/completion.bash.inc ]; then
   source '/home/katie/Downloads/google-cloud-sdk/completion.bash.inc'
 fi
+
+# Clone from Reactive Robotics git
+rr-git-clone() {
+[ -z $1 ] && { echo -e "\e[1;31mError: no repository name given.\e[0m"; return 1; }
+repo_name="$1"
+echo "Cloning repository $repo_name"
+git clone "git@bitbucket.org:reactive-robotics/$repo_name.git"
+}
