@@ -1,7 +1,5 @@
-// File: %FFILE%
-// Date created: %DATE%
-// Author: %USER%
-// Description: %HERE%
+/// @file
+/// %HERE%
 
 #ifndef %MACROCLASS%_HEADER_DEF_
 #define %MACROCLASS%_HEADER_DEF_

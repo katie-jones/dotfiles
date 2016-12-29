@@ -1,8 +1,6 @@
-// File: %FFILE%
-// Date created: %DATE%
-// Author: %USER%
-// Description: %HERE%
+/// @file
+/// %HERE%
 
-#include "%FILE%.h"
-
+#include "gmock/gmock.h"
+<+ Include files +>
 
