@@ -1,6 +1,6 @@
 /// @file
 /// %HERE%
 
-#include "%FILE%.h"
+#include "gmock/gmock.h"
 <+ Include files +>
 
