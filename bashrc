@@ -52,3 +52,6 @@ repo_name="$1"
 echo "Cloning repository $repo_name"
 git clone "git@bitbucket.org:reactive-robotics/$repo_name.git"
 }
+
+# Change to R2 low_level directory
+alias gotor2='cd /home/katie/work/habilitom/R2/low_level'
