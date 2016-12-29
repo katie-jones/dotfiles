@@ -1,3 +1,6 @@
 [submodule "vim/bundle/Vundle.vim"]
 	path = dotfiles/vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
+[submodule "scripts/ssh-find-agent"]
+	path = scripts/ssh-find-agent
+	url = https://github.com/wwalker/ssh-find-agent
