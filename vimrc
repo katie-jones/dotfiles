@@ -171,6 +171,9 @@ set foldmethod=indent
 nnoremap <space> za
 vnoremap <space> zf
 
+" paste toggle
+set pastetoggle=<F2>
+
 
 " ---------------------------------------------
 " --------------- LATEX SUITE -----------------
