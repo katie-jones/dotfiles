@@ -27,6 +27,8 @@ Plugin 'vim-scripts/indentpython.vim' " python indentation
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'} " status bar
 Plugin 'aperezdc/vim-template' " template files
 Plugin 'vim-scripts/DoxygenToolkit.vim' " doxygen shortcuts
+Plugin 'SirVer/ultisnips' " Engine for inserting code snippets
+Plugin 'honza/vim-snippets' " Code snippets
 
 call vundle#end()
 filetype plugin indent on
@@ -111,6 +113,16 @@ let g:template_no_builtin_template = 1
 
 " Default username
 let g:username = 'Katie Jones'
+
+" ---------------------------------------------
+" -------------- ULTISNIPS SHIT ---------------
+" ---------------------------------------------
+
+let g:UltiSnipsUsePythonVersion = 2 " vim is compiled with python2
+let g:UltiSnipsEditSplit = 'vertical'
+let g:UltiSnipsExpandTrigger="<c-g>"
+let g:UltiSnipsListSnippets="<c-h>"
+let g:UltiSnipsSnippetDirectories = ['/home/katie/.vim/UltiSnips', 'UltiSnips']
 
 " ---------------------------------------------
 " ---------------- FILE TYPES -----------------
