@@ -1,8 +1,10 @@
-/// @file
-/// %HERE%
+/**
+ * @file
+ * %HERE%
+ */
 
-#ifndef %MACROCLASS%_HEADER_DEF_
-#define %MACROCLASS%_HEADER_DEF_
+#ifndef %MACROCLASS%_H_
+#define %MACROCLASS%_H_
 
 /**
  * <+Class description+>
@@ -18,4 +20,4 @@ class %CAMELCLASS% {
 
 };
 
-#endif
+#endif  // %MACROCLASS%_H_
