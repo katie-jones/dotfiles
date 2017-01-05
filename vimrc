@@ -121,7 +121,7 @@ let g:email = 'katie.jones@reactive-robotics.com'
 " -------------- ULTISNIPS SHIT ---------------
 " ---------------------------------------------
 
-let g:UltiSnipsUsePythonVersion = 2 " vim is compiled with python2
+let g:UltiSnipsUsePythonVersion = 3 " vim is compiled with python3
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsExpandTrigger="<c-g>"
 let g:UltiSnipsListSnippets="<c-h>"
