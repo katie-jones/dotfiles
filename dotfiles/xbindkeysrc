@@ -34,12 +34,18 @@
 # Uncomment the lines above if you want to pay attention to them.
 
 # ----------------------------------------------------------
-#"amixer set Master 5%+"
-#   XF86AudioRaiseVolume
-#"amixer set Master 5%-"
-#   XF86AudioLowerVolume
-#"amixer set Master toggle"
-#   XF86AudioMute
+"amixer set Master 5%+"
+  XF86AudioRaiseVolume
+"amixer set Master 5%-"
+  XF86AudioLowerVolume
+"amixer set Master toggle"
+  XF86AudioMute
+
+# Brightness
+"xbacklight -inc 5"
+  XF86MonBrightnessUp
+"xbacklight -dec 5"
+  XF86MonBrightnessDown
 
 
 #keystate_numlock = enable
