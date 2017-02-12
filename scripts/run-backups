@@ -121,8 +121,8 @@ main() {
         if [ "$run_backups" = "1" ]; then
             echo "Making new backups."
 
-            # mount drive if not already mounted
-            [ -z $mounted ] && mount_backups $mount_point
+            # mount drive
+            mount_backups $mount_point
 
             # call function to make new backups
             make_backups
