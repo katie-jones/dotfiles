@@ -66,6 +66,16 @@ mkgrubcfg() {
     sudo umount /mnt/efi
 }
 
+# Function to fix natural scrolling and tap-to-click in libinput, which seems
+# to crash and reset randomly
+fix-libinput-config() {
+    # Fix tap-to-click
+    xinput set-prop 11 289 1
+
+    # Fix natural scrolling
+    xinput set-prop 11 299 1
+}
+
 
 export EDITOR=vim
 
