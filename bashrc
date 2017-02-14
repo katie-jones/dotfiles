@@ -29,8 +29,8 @@ mtecrypt() {
 }
 
 getpassword() {
-    mounted=
-    [ -e $HOME/important/pw/sprd ] || mtecrypt && mounted=1
+    mounted=0
+    [ -e $HOME/important/pw/sprd ] || { mtecrypt; mounted=1; }
     pw=$(gawk -v arg="$1" 'index($0,arg) { print $2 }' $HOME/important/pw/sprd)
     [ -n "$pw" ] \
     && { \
@@ -38,12 +38,12 @@ getpassword() {
         echo "Password copied!"; } \
     || { \
         echo "Password for $1 not found..."; }
-    [ -z "$mounted" ] && umount $HOME/important
+    [ "$mounted" -eq "1" ] && { echo "Unmounting partition..."; sleep 3; umount $HOME/important; }
 }
 
 getquestion() {
-    mounted=
-    [ -e $HOME/important/pw/qus ] || mtecrypt && mounted=1
+    mounted=0
+    [ -e $HOME/important/pw/qus ] || { mtecrypt; mounted=1; }
     pw=$(gawk -v arg="$1" 'index($0,arg) { print $NF }' $HOME/important/pw/qus)
     [ -n "$pw" ] \
     && { \
@@ -51,7 +51,7 @@ getquestion() {
         echo "Answer copied!"; } \
     || { \
         echo "Answer for $1 not found..."; }
-    [ -z "$mounted" ] && umount $HOME/important
+    [ "$mounted" -eq "1" ] && { echo "Unmounting partition..."; sleep 3; umount $HOME/important; }
 }
 
 mkgrubcfg() {
