@@ -1,0 +1,5 @@
+snippet addtestexec "Add a CMake test executable" b
+add_executable(${1:executable_name}_${2:unit_}test ${3:$1_$2test}.cc)
+target_link_libraries($1_$2test gtest gtest_main gmock gmock_main)
+add_test($1_test $1_$2test)
+endsnippet
