@@ -8,6 +8,19 @@ List all packages:
 apt-mark showmanual
 ```
 
+# Arch
+--------------------------------------------------
+
+## Package Management
+List all native, manually installed packages:
+```bash
+pacman -Qqettn
+```
+
+List all non-native (e.g. AUR) manually installed packages:
+```bash
+pacman -Qqettm
+```
 # Vim
 --------------------------------------------------
 
