@@ -11,6 +11,9 @@ apt-mark showmanual
 # Arch
 --------------------------------------------------
 
+## Multiple Displays
+List monitors: `xrandr -q`. Set output on multiple displays: `xrandr --output LVDS-1 --auto --output DP-1 --auto --above LVDS-1`.
+
 ## Package Management
 List all native, manually installed packages:
 ```bash
