@@ -29,6 +29,7 @@ Plugin 'aperezdc/vim-template' " template files
 Plugin 'vim-scripts/DoxygenToolkit.vim' " doxygen shortcuts
 Plugin 'SirVer/ultisnips' " Engine for inserting code snippets
 Plugin 'honza/vim-snippets' " Code snippets
+Plugin 'tpope/vim-surround' " Surround with quotes, brackets, tags etc.
 
 call vundle#end()
 filetype plugin indent on
