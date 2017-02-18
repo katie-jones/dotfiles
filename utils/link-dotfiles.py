@@ -19,6 +19,7 @@ def main():
                 "dotfiles/xbindkeysrc",
                 "xinit-config/xinit_deepin",
                 "xinit-config/xinit_lxqt",
+                "xinit-config/xinit_budgie",
                 "xinit-config/xinit_xfce"
                ]
 

@@ -114,5 +114,5 @@ if [ -f /home/katie/Downloads/google-cloud-sdk/completion.bash.inc ]; then
 fi
 
 # Source ssh_find_agent script and start ssh-agent if not running
-. ~/dotfiles/scripts/ssh-find-agent/ssh-find-agent.sh
+. ~/linux-config/scripts/ssh-find-agent/ssh-find-agent.sh
 ssh-find-agent -a || eval $(ssh-agent) > /dev/null
