@@ -1,9 +1,9 @@
 # some vim history file
-vim/.netrwhist
+dotfiles/vim/.netrwhist
 
 # ignore vim bundles -- contain only other git repos
-vim/bundle/*
-!vim/bundle/Vundle*
+dotfiles/vim/bundle/*
+dotfiles/!vim/bundle/Vundle*
 
 # ignore python compiled files
 *.pyc
