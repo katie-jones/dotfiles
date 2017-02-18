@@ -7,9 +7,13 @@ class Partition:
     entry in /etc/fstab.
     '''
 
-    def __init__(self, uuid, mount_point, partition_type, mount_options,
-                 fs_checks, comments):
-        self.uuid = uuid
+    def __init__(self, identifier, mount_point, partition_type, mount_options,
+                 fs_checks, comments, identifier_is_uuid = True):
+        if identifier_is_uuid:
+            self.identifier = 'UUID=' + identifier
+        else:
+            self.identifier = identifier
+
         self.mount_point = mount_point
         self.partition_type = partition_type
         self.mount_options = mount_options
@@ -18,7 +22,7 @@ class Partition:
 
     def __repr__(self):
         return '{6:s}\n{0:46s}\t{1:24s}\t{2:13s}\t{3:18s}\t{4:2d}\t{5:2d}'\
-                .format('UUID=' + self.uuid, self.mount_point, self.partition_type,
+                .format(self.identifier, self.mount_point, self.partition_type,
                         self.mount_options, self.fs_checks[0],
                         self.fs_checks[1], '# ' + self.comments)
 
@@ -74,7 +78,7 @@ def main():
                                'ecryptfs_fnek_sig=0094cbcb775e3ea4,'
                                'ecryptfs_cipher=aes,ecryptfs_key_bytes=32,'
                                'ecryptfs_unlink_sigs', [0, 0],
-                               'encrypted partition')
+                               'encrypted partition', False)
 
     }
 
