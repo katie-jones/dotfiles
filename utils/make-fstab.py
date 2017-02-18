@@ -28,7 +28,7 @@ class Partition:
 
 def main():
     partitions = {
-        'root': Partition('', '/' ,'ext4',
+        'root': Partition('d957d314-2629-418d-b1e5-64bc78d03a64', '/' ,'ext4',
                           'errors=remount-ro', [0, 2] , 'root partition'),
         'swap': Partition('01098383-d26f-4fc3-a570-2fa65f767a0c', 'none',
                           'swap', 'sw', [0, 0], 'swap'),
