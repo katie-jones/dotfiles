@@ -11,15 +11,20 @@ def main():
         return
 
     # List files to link
-    dotfiles = ["bashrc", 
-                "latexmkrc", 
-                "tmux.conf", 
-                "vimrc", 
-                "vim", 
-                "xbindkeysrc"]
+    dotfiles = ["dotfiles/bashrc",
+                "dotfiles/latexmkrc",
+                "dotfiles/tmux.conf",
+                "dotfiles/vimrc",
+                "dotfiles/vim",
+                "dotfiles/xbindkeysrc",
+                "xinit-config/xinit_deepin",
+                "xinit-config/xinit_lxqt",
+                "xinit-config/xinit_xfce"
+               ]
 
-    # Get directory of dotfiles
-    dotfiles_dir = os.path.dirname(os.path.realpath(__file__))
+    # Get directory of linux-config
+    dotfiles_dir = os.path.realpath(os.path.dirname(os.path.realpath(__file__))
+                                    + '/..')
 
     # Loop through each file to create link
     for dotfile in dotfiles:
@@ -27,7 +32,7 @@ def main():
         original_file = os.path.join(dotfiles_dir, dotfile)
 
         # File name of symlink to be created
-        symlink = os.path.join(home_dir, r'.' + dotfile)
+        symlink = os.path.join(home_dir, r'.' + os.path.basename(dotfile))
 
         print('Symlinking {:s} -> {:s}...'.format(original_file, symlink))
 

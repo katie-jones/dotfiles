@@ -27,7 +27,7 @@ set_home_vars() {
     mount_point=/mnt/backups/home # where backup drive is mounted
     backup_folder=/mnt/backups/home # root folder holding backups
     to_backup=/home/ # folder to backup -- should start and end with a /
-    excludes=/home/katie/.home_excludes # file with stuff to exclude
+    excludes=/home/katie/linux-config/custom-config/home_excludes # file with stuff to exclude
     logfile=/var/log/backups/home.log # file to send output and rsync logs to
     errfile=/var/log/backups/home.err # file to send errors to
     link_name=current-home # name of symlink in $backup_folder pointing to latest home backups
@@ -40,7 +40,7 @@ set_full_vars() {
     mount_point=/mnt/backups/root # where backup drive is mounted
     backup_folder=/mnt/backups/root # root folder holding backups
     to_backup=/ # folder to backup -- should start and end with a /
-    excludes=/home/katie/.full_excludes # file with stuff to exclude
+    excludes=/home/katie/linux-config/custom-config/full_excludes # file with stuff to exclude
     logfile=/var/log/backups/full.log # file to send output and rsync logs to
     errfile=/var/log/backups/full.err # file to send errors to
     link_name=current-full # name of symlink in $backup_folder pointing to latest full backups
@@ -53,7 +53,7 @@ set_shared_vars() {
     mount_point=/mnt/backups/shared # where backup drive is mounted
     backup_folder=/mnt/backups/shared # root folder holding backups
     to_backup=/mnt/shared/ # folder to backup -- should start and end with a /
-    excludes=/home/katie/.shared_excludes # file with stuff to exclude
+    excludes=/home/katie/linux-config/custom-config/shared_excludes # file with stuff to exclude
     logfile=/var/log/backups/shared.log # file to send output and rsync logs to
     errfile=/var/log/backups/shared.err # file to send errors to
     link_name=current # name of symlink in $backup_folder pointing to latest full backups
@@ -66,7 +66,7 @@ set_media_vars() {
     mount_point=/mnt/backups/media # where backup drive is mounted
     backup_folder=/mnt/backups/media # root folder holding backups
     to_backup=/mnt/media/ # folder to backup -- should start and end with a /
-    excludes=/home/katie/.media_excludes # file with stuff to exclude
+    excludes=/home/katie/linux-config/custom-config/media_excludes # file with stuff to exclude
     logfile=/var/log/backups/media.log # file to send output and rsync logs to
     errfile=/var/log/backups/media.err # file to send errors to
     link_name=current # name of symlink in $backup_folder pointing to latest full backups
