@@ -1,3 +1,4 @@
+/katie/important
 /katie/Google
 /katie/Dropbox
 /katie/OneDrive
@@ -8,10 +9,7 @@
 /katie/shared
 /*/.cache
 /*/.local/share/Trash/*
-NDS.vdi
-/katie/arch_arm
-/katie/dotfiles
-/katie/.vim
+/katie/linux-config
 /katie/.secret
 /katie/school
 .Trashes
@@ -19,4 +17,3 @@ NDS.vdi
 .fseventsd
 .DS_Store
 .DocumentRevisions*
-/katie/important
