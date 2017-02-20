@@ -25,6 +25,9 @@ class BackupManager:
 
         self.global_config = self.parse_config(files_to_parse)
 
+        self.logfile = None
+        self.errfile = None
+
         # Make log and history dirs
         try:
             os.makedirs(os.path.dirname(self.HISTORY_FILENAME))
@@ -132,21 +135,23 @@ class BackupManager:
         '''
         Log string to logfile.
         '''
-        if print_time:
-            self.logfile.write('[{:s}] '.format(
-                self.get_current_time_formatted()))
+        if self.logfile is not None:
+            if print_time:
+                self.logfile.write('[{:s}] '.format(
+                    self.get_current_time_formatted()))
 
-        self.logfile.write(string + '\n')
+            self.logfile.write(string + '\n')
         print(string)
 
     def errlog(self, string, print_time = True):
         '''
         Log string to errfile.
         '''
-        if print_time:
-            self.logfile.write('[{:s}] '.format(self.get_current_time_formatted()))
+        if self.errfile is not None:
+            if print_time:
+                self.logfile.write('[{:s}] '.format(self.get_current_time_formatted()))
 
-        self.errfile.write(string + '\n')
+            self.errfile.write(string + '\n')
         print(string)
 
     @staticmethod
