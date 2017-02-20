@@ -1,4 +1,4 @@
 #!/bin/bash
-# Script to be run daily by root
 
-echo "Daily run by root completed."
+# Update after checking for backups
+/home/katie/linux-config/scripts/safe_updates.py

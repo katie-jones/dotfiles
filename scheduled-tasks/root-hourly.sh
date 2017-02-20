@@ -1,4 +1,5 @@
 #!/bin/bash
-# Script to be run hourly by root
 
-echo "Hourly run by root completed."
+# Run backups (script checks timestamps -- backups aren't actually generate 
+# each hour)
+/home/katie/linux-config/scripts/run_backups.py
