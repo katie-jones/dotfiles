@@ -1,0 +1,9 @@
+[Unit]
+Description=Run katie's scripts daily and on boot
+
+[Timer]
+OnBootSec=28min
+OnUnitActiveSec=1d
+
+[Install]
+WantedBy=timers.target

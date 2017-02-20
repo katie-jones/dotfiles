@@ -1,0 +1,7 @@
+[Unit]
+Description=Run katie's hourly scripts
+
+[Service]
+Type=simple
+User=katie
+ExecStart=/home/katie/linux-config/scheduled-tasks/hourly.sh

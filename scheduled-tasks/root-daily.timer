@@ -1,0 +1,9 @@
+[Unit]
+Description=Run root scripts daily
+
+[Timer]
+OnBootSec=17min
+OnUnitActiveSec=1d
+
+[Install]
+WantedBy=timers.target
