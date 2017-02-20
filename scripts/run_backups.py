@@ -291,7 +291,10 @@ class BackupManager:
             os.unlink(symlink_latest_backup_folder)
         except FileNotFoundError:
             pass
-        os.symlink(new_backup_folder_base, symlink_latest_backup_folder)
+        os.symlink(os.path.basename(new_backup_folder_base),
+                   os.path.basename(symlink_latest_backup_folder))
+
+        # TODO: Unmount partition if it was not previously mounted
 
         self.log('Backups succeeded.')
 
