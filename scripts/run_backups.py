@@ -28,7 +28,7 @@ class BackupManager:
         self.logfile = None
         self.errfile = None
 
-        # Make log and history dirs
+        # Make history dir
         try:
             os.makedirs(os.path.dirname(self.HISTORY_FILENAME))
         except FileExistsError:
@@ -188,7 +188,6 @@ class BackupManager:
                 traceback.print_exception(exc_type, exc_value, exc_traceback,
                               limit=2, file=sys.stdout)
                 self.errlog(str(e))
-                self.errlog(traceback.print_exception(e))
                 backups_made = False
         else:
             backups_made = False
@@ -259,7 +258,7 @@ class BackupManager:
                 continue
 
         # Set up rsync command
-        shell_command = ['sudo', 'rsync', '-ax', '--log-file',
+        shell_command = ['rsync', '-ax', '--log-file',
                          section.get('logfile')]
 
         # Check if symlink to previous backup exists
