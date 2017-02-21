@@ -6,6 +6,17 @@ import subprocess
 import sys
 import time
 
+def parse_args(argv):
+    '''
+    Parse type of update (official repos or packer) to run.
+    '''
+    parser = argparse.ArgumentParser(description='Run updates if an up-to-date'
+                                     ' backup exists.')
+    parser.add_argument('update_type', action='store',
+                        choices=['packer', 'pacman'],
+                        help='Type of update to run (pacman or packer).')
+    return parser.parse_args(argv)
+
 def main():
     # Arg 1 should always be the update type -- parsed by local parser
     update_args = parse_args(sys.argv[1:2])
@@ -29,17 +40,31 @@ def main():
 
     if system_backup_status == 'not found':
         print('No full system backup was found. Not continuing with update.')
+        return 1
     elif system_backup_status == 'outdated':
         print('System backup is outdated. Not continuing with update.')
+        return 1
     else:
         print('System backup is up-to-date. Continuing with update.')
-        shell_command = 'pacman -Suy --noconfirm'
+        if update_args.update_type == 'pacman':
+            print('Updating official repository packages.')
+            shell_command = 'pacman -Suy --noconfirm'
+        elif update_args.update_type == 'packer':
+            print('Updating AUR packages.')
+            shell_command = 'packer -Suy --auronly --noconfirm'
+        else:
+            print('Update type {:s} not recognized.'.format(
+                      update_args.update_type))
+            return 1
+
         p = subprocess.Popen(shell_command, shell = True)
         p.communicate()
         if p.returncode == 0:
             print('Update succeeded.')
+            return 0
         else:
             print('Error occurred during update.')
+            return 1
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
