@@ -223,6 +223,23 @@ class BackupManager:
                                    section.get('folder_prefix') + \
                 datetime.datetime.now().strftime('%Y-%m-%dT%H:%M'))
 
+        # Make directory to hold new backup
+        n = 0
+        while (1):
+            if n > 0:
+                tmp_folder_name = new_backup_folder_base + str(n)
+            else:
+                tmp_folder_name = new_backup_folder_base
+            try:
+                os.makedirs(tmp_folder_name)
+                new_backup_folder_base = tmp_folder_name
+                break
+            except FileExistsError:
+                n = n + 1
+                continue
+
+        # Append name of directory to back up to the folder name (such that all
+        # backups start with root at /)
         if section.get('to_backup')[0] == '/':
             self.log(section.get('to_backup')[1:])
             new_backup_folder = os.path.join(new_backup_folder_base,
@@ -232,6 +249,7 @@ class BackupManager:
                                              section.get('to_backup'))
 
         self.log('New backup folder: ' + new_backup_folder)
+        os.makedirs(new_backup_folder)
 
         # Make sure new backup folder has a trailing slash
         if new_backup_folder[-1] != '/':
@@ -241,21 +259,6 @@ class BackupManager:
         # Get name of previous (symlinked) backup folder
         symlink_latest_backup_folder = os.path.join(section.get('backup_folder'),
                                       section.get('link_name'))
-
-        # Make directory to hold new backup
-        n = 0
-        while (1):
-            if n > 0:
-                tmp_folder_name = new_backup_folder + str(n)
-            else:
-                tmp_folder_name = new_backup_folder
-            try:
-                os.makedirs(tmp_folder_name)
-                new_backup_folder = tmp_folder_name
-                break
-            except FileExistsError:
-                n = n + 1
-                continue
 
         # Set up rsync command
         shell_command = ['rsync', '-ax', '--log-file',
@@ -290,8 +293,10 @@ class BackupManager:
             os.unlink(symlink_latest_backup_folder)
         except FileNotFoundError:
             pass
-        os.symlink(os.path.basename(new_backup_folder_base),
-                   os.path.basename(symlink_latest_backup_folder))
+
+        os.symlink(os.path.relpath(os.path.join(new_backup_folder_base),
+                              os.path.dirname(symlink_latest_backup_folder)),
+                   symlink_latest_backup_folder)
 
         # TODO: Unmount partition if it was not previously mounted
 
