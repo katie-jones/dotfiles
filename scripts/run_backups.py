@@ -53,8 +53,13 @@ class BackupManager:
                 pass
 
             # Open log and error files
-            self.logfile = open(config_section.get('logfile'), 'w')
-            self.errfile = open(config_section.get('errfile'), 'w')
+            if len(config_section.get('logfile')) > 0:
+                self.logfile = open(config_section.get('logfile'), 'w')
+
+            if (config_section.get('logfile') !=
+                config_section.get('errfile')) and \
+               len(config_section.get('errfile')) > 0:
+                self.errfile = open(config_section.get('errfile'), 'w')
 
             # Log which section we're running
             self.log('Date: {:s}'.format(
@@ -66,9 +71,12 @@ class BackupManager:
                 # If backups were successful, add an entry in the cache file
                 history_writer.read_dict({section: {'last_backup':
                                                     int(time.time())}})
-            # Close log and error files
-            self.logfile.close()
-            self.errfile.close()
+                # Close log and error files
+                if self.logfile:
+                    self.logfile.close()
+
+                if self.errfile:
+                    self.errfile.close()
 
         with open(self.HISTORY_FILENAME, 'w') as history_file:
             history_writer.write(history_file)
