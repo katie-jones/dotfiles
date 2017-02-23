@@ -8,10 +8,13 @@ import subprocess
 import argparse
 import configparser
 import datetime
+from enum import Enum
 
 class BackupManager:
     HISTORY_FILENAME = '/var/cache/ink/history'
     SYSTEM_CONFIG_FILENAME = '/etc/ink/inkrc'
+
+    MountStatus = Enum('MountStatus', 'NEWLY_MOUNTED ALREADY_MOUNTED')
 
     def __init__(self, args):
         self.args = args
@@ -180,11 +183,11 @@ class BackupManager:
             self.log('Making new backups.')
             # Mount the drive where the backups should go
             try:
-                self.mount_drive(section)
+                mount_status = self.mount_drive(section)
             except RuntimeError as e:
                 self.errlog('Error: ' + str(e))
                 self.errlog('Exiting.')
-                return
+                return False
 
             # Make the backups
             try:
@@ -199,6 +202,20 @@ class BackupManager:
                               limit=2, file=sys.stdout)
                 self.errlog(str(e))
                 backups_made = False
+
+            # Unmount drive
+            if mount_status == self.MountStatus.NEWLY_MOUNTED:
+                try:
+                    self.unmount_drive(section)
+                except Exception as e:
+                    self.errlog('An error occurred while unmounting the '
+                                'partition.')
+                    exc_type, exc_value, exc_traceback = sys.exc_info()
+                    traceback.print_exception(exc_type, exc_value, exc_traceback,
+                                  limit=2, file=self.logfile)
+                    traceback.print_exception(exc_type, exc_value, exc_traceback,
+                                  limit=2, file=sys.stdout)
+                    self.errlog(str(e))
         else:
             backups_made = False
 
@@ -224,8 +241,15 @@ class BackupManager:
             last_backup = 0
 
         # Check if the last backup is too old
-        return (int(time.time()) - last_backup) > \
+        backup_outdated = (int(time.time()) - last_backup) > \
            section_config.getint('frequency_seconds')
+
+        if backup_outdated:
+            self.log('Previous backup is outdated. Running new backups.')
+        else:
+            self.log('Previous backup not outdated. Not running new backups.')
+
+        return backup_outdated
 
     def make_backups(self, section):
         # Get name of new backup folder
@@ -311,9 +335,24 @@ class BackupManager:
                               os.path.dirname(symlink_latest_backup_folder)),
                    symlink_latest_backup_folder)
 
-        # TODO: Unmount partition if it was not previously mounted
-
         self.log('Backups succeeded.')
+
+    def unmount_drive(self, section):
+        '''
+        Unmount the partition where backups were made.
+        '''
+        self.log('Unmounting partition...')
+        shell_command = ['umount', section.get('mount_point')]
+
+        # Unmount device
+        p = subprocess.Popen(' '.join(shell_command), shell=True)
+        p.communicate()
+
+        # Check return code and raise error if command did not succeed
+        if p.returncode != 0:
+            raise RuntimeError('Unmounting backup disk failed.')
+
+        self.log('Unmounting successful.')
 
     def mount_drive(self, section):
         '''
@@ -325,7 +364,7 @@ class BackupManager:
             self.log('Partition not already mounted. Trying to mount it.')
 
             # Initialize basic command
-            shell_command = ["sudo", "mount"]
+            shell_command = ["mount"]
 
             # Check UUID, label and device in that order
             if len(section.get('UUID')) > 0:
@@ -347,8 +386,10 @@ class BackupManager:
                 raise RuntimeError('Mounting backup disk failed.')
 
             self.log('Partition mounted.')
+            return self.MountStatus.NEWLY_MOUNTED
         else:
             self.log('Partition already mounted.')
+            return self.MountStatus.ALREADY_MOUNTED
 
     @staticmethod
     def is_mounted(desired_mount_point):
