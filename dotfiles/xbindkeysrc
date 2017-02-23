@@ -47,6 +47,12 @@
 "xbacklight -dec 5"
   XF86MonBrightnessDown
 
+# Keyboard
+"/home/katie/linux-config/scripts/deepin-switch-kbd.py"
+  control + space
+"/home/katie/linux-config/scripts/deepin-switch-kbd.py b"
+  control + shift + space
+
 
 #keystate_numlock = enable
 #keystate_capslock = enable
