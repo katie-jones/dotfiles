@@ -35,7 +35,9 @@ class BackupManager:
             pass
 
     def run(self):
+        # Read initial history
         history_writer = configparser.ConfigParser()
+        history_writer.read(self.HISTORY_FILENAME)
 
         # Loop through sections and run backups for each one
         for section in self.global_config.sections():
@@ -71,12 +73,12 @@ class BackupManager:
                 # If backups were successful, add an entry in the cache file
                 history_writer.read_dict({section: {'last_backup':
                                                     int(time.time())}})
-                # Close log and error files
-                if self.logfile:
-                    self.logfile.close()
+            # Close log and error files
+            if self.logfile:
+                self.logfile.close()
 
-                if self.errfile:
-                    self.errfile.close()
+            if self.errfile:
+                self.errfile.close()
 
         with open(self.HISTORY_FILENAME, 'w') as history_file:
             history_writer.write(history_file)
@@ -257,7 +259,10 @@ class BackupManager:
                                              section.get('to_backup'))
 
         self.log('New backup folder: ' + new_backup_folder)
-        os.makedirs(new_backup_folder)
+        try:
+            os.makedirs(new_backup_folder)
+        except FileExistsError:
+            pass
 
         # Make sure new backup folder has a trailing slash
         if new_backup_folder[-1] != '/':
