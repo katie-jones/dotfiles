@@ -19,7 +19,6 @@ obconf-qt-git
 packer
 pepper-flash
 playerctl
-poco
 python-pygraphviz
 python2-deepin-ui
 python2-empy

@@ -24,6 +24,7 @@ dialog
 dmd
 docbook-sgml
 docbook-utils
+docker
 dosfstools
 doxygen
 dropbox
@@ -80,6 +81,7 @@ man-db
 man-pages
 mdadm
 meld
+mercurial
 mesa-demos
 nano
 netctl
@@ -93,6 +95,7 @@ oxygen-icons
 p7zip
 pcmciautils
 pkg-config
+poco
 powertop
 pptpclient
 print-manager
