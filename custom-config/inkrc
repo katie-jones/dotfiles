@@ -18,7 +18,7 @@ exclude_file=/home/katie/linux-config/custom-config/home_excludes
 logfile=/var/log/ink/home.log
 errfile=/var/log/ink/home.err
 link_name=current
-folder_prefix=home-nolinks-
+folder_prefix=home-
 frequency_seconds=7200
 backup_type=nolinks
 
@@ -42,7 +42,7 @@ exclude_file=/home/katie/linux-config/custom-config/full_excludes
 logfile=/var/log/backups/full.log
 errfile=/var/log/backups/full.err
 link_name=current
-folder_prefix=full-nolinks
+folder_prefix=full-
 frequency_seconds=86400
 backup_type=nolinks
 
