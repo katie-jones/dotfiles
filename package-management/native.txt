@@ -75,6 +75,7 @@ liblxqt
 libreoffice-fresh
 libsignon-glib
 licenses
+linux
 logrotate
 lvm2
 man-db

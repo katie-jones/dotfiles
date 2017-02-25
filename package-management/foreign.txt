@@ -1,6 +1,6 @@
 acpilight
 bazel
-broadcom-wl
+broadcom-wl-dkms
 caffeine-ng
 chromium-widevine
 diffmerge
