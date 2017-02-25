@@ -450,6 +450,7 @@ class BackupManager:
 
             # Make a new empty directory matching the previous backup
             # folder base
+            previous_backup_folder_base += '_bak'
             os.mkdir(previous_backup_folder_base)
 
             # Get the actual previous backup folder
