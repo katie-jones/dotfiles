@@ -24,7 +24,8 @@ class BackupManager:
         if len(self.args.config_filename) > 0:
             files_to_parse.append(self.args.config_filename)
 
-        files_to_parse.append(self.SYSTEM_CONFIG_FILENAME)
+        if (self.args.use_system_config):
+            files_to_parse.append(self.SYSTEM_CONFIG_FILENAME)
 
         self.global_config = self.parse_config(files_to_parse)
 
@@ -62,8 +63,8 @@ class BackupManager:
                 self.logfile = open(config_section.get('logfile'), 'w')
 
             if (config_section.get('logfile') !=
-                config_section.get('errfile')) and \
-               len(config_section.get('errfile')) > 0:
+                    config_section.get('errfile')) and \
+                    len(config_section.get('errfile')) > 0:
                 self.errfile = open(config_section.get('errfile'), 'w')
 
             # Log which section we're running
@@ -111,8 +112,8 @@ class BackupManager:
         except ValueError:
             raise ValueError("The frequency of the backups for '{:s}' (option "
                              "'frequency_seconds') was given as '{:s}', "
-                             "which is not an int!".format(config.name,
-                                 config.get('frequency_seconds')))
+                             "which is not an int!".format(
+                                 config.name, config.get('frequency_seconds')))
 
         # Set all directory arguments to have no trailing slash
         directory_args = ['mount_point', 'backup_folder', 'to_backup', 'link_name']
@@ -141,7 +142,7 @@ class BackupManager:
                              'link_name': 'current',
                              'folder_prefix': 'backup-',
                              'frequency_seconds': '{:d}'.format(60*60*24)
-                            };
+                             };
         return config
 
     def log(self, string, print_time = True):
@@ -197,9 +198,9 @@ class BackupManager:
                 self.errlog('An error occurred making the backups.')
                 exc_type, exc_value, exc_traceback = sys.exc_info()
                 traceback.print_exception(exc_type, exc_value, exc_traceback,
-                              limit=2, file=self.logfile)
+                                          limit=2, file=self.logfile)
                 traceback.print_exception(exc_type, exc_value, exc_traceback,
-                              limit=2, file=sys.stdout)
+                                          limit=2, file=sys.stdout)
                 self.errlog(str(e))
                 backups_made = False
 
@@ -212,9 +213,9 @@ class BackupManager:
                                 'partition.')
                     exc_type, exc_value, exc_traceback = sys.exc_info()
                     traceback.print_exception(exc_type, exc_value, exc_traceback,
-                                  limit=2, file=self.logfile)
+                                              limit=2, file=self.logfile)
                     traceback.print_exception(exc_type, exc_value, exc_traceback,
-                                  limit=2, file=sys.stdout)
+                                              limit=2, file=sys.stdout)
                     self.errlog(str(e))
         else:
             backups_made = False
@@ -242,7 +243,7 @@ class BackupManager:
 
         # Check if the last backup is too old
         backup_outdated = (int(time.time()) - last_backup) > \
-           section_config.getint('frequency_seconds')
+            section_config.getint('frequency_seconds')
 
         if backup_outdated:
             self.log('Previous backup is outdated. Running new backups.')
@@ -415,6 +416,8 @@ def parse_args(argv):
     parser = argparse.ArgumentParser(description='Make local backups of disk.')
     parser.add_argument('config_filename', default = '', nargs = '?',
                         help='Path to configuration file.')
+    parser.add_argument('--ignore-system-config', action='store_false',
+                        dest='use_system_config')
     parser.add_argument('-f', dest='force_backup', action='store_true',
                         help='Force backup regardless of time stamp')
     return parser.parse_args(argv)
