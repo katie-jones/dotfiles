@@ -23,7 +23,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
 Plugin 'scrooloose/syntastic' " syntax highlighting
 Plugin 'nvie/vim-flake8' " PEP 8 syntax highlighting
 Plugin 'tmhedberg/SimpylFold' " python code folding
-Plugin 'vim-scripts/indentpython.vim' " python indentation
+Plugin 'Vimjas/vim-python-pep8-indent' " python indentation
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'} " status bar
 Plugin 'aperezdc/vim-template' " template files
 Plugin 'vim-scripts/DoxygenToolkit.vim' " doxygen shortcuts
