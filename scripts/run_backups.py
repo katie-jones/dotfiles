@@ -8,6 +8,7 @@ import subprocess
 import argparse
 import configparser
 import datetime
+import shutil
 from enum import Enum
 
 class BackupManager:
@@ -133,6 +134,7 @@ class BackupManager:
         config['DEFAULT'] = {'mount_point': '/mnt/backups',
                              'backup_folder': '%(mount_point)s',
                              'to_backup': '',
+                             'backup_type': 'incremental',
                              'exclude_file': '',
                              'UUID': '',
                              'partition_label': '',
@@ -204,21 +206,20 @@ class BackupManager:
                 self.errlog(str(e))
                 backups_made = False
 
-            # Unmount drive
-            if mount_status == self.MountStatus.NEWLY_MOUNTED:
-                try:
-                    self.unmount_drive(section)
-                except Exception as e:
-                    self.errlog('An error occurred while unmounting the '
-                                'partition.')
-                    exc_type, exc_value, exc_traceback = sys.exc_info()
-                    traceback.print_exception(exc_type, exc_value, exc_traceback,
-                                              limit=2, file=self.logfile)
-                    traceback.print_exception(exc_type, exc_value, exc_traceback,
-                                              limit=2, file=sys.stdout)
-                    self.errlog(str(e))
-        else:
-            backups_made = False
+            finally:
+                # Unmount drive
+                if mount_status == self.MountStatus.NEWLY_MOUNTED:
+                    try:
+                        self.unmount_drive(section)
+                    except Exception as e:
+                        self.errlog('An error occurred while unmounting the '
+                                    'partition.')
+                        exc_type, exc_value, exc_traceback = sys.exc_info()
+                        traceback.print_exception(exc_type, exc_value, exc_traceback,
+                                                  limit=2, file=self.logfile)
+                        traceback.print_exception(exc_type, exc_value, exc_traceback,
+                                                  limit=2, file=sys.stdout)
+                        self.errlog(str(e))
 
         return backups_made
 
@@ -252,17 +253,25 @@ class BackupManager:
 
         return backup_outdated
 
-    def make_backups(self, section):
+    def _get_backup_folder_basename(self, section_config):
+        '''
+        Get base name of folder to hold new backups and create the folder in
+        the file system. This folder will be in the 'backup_folder' directory
+        and will have a name based on the current date/time in the system time
+        zone using the ISO 8601 format. Name clashes are resolved by appending
+        an integer to the end of the folder name.
+        '''
         # Get name of new backup folder
-        new_backup_folder_base = os.path.join(section.get('backup_folder'),
-                                   section.get('folder_prefix') + \
-                datetime.datetime.now().strftime('%Y-%m-%dT%H:%M'))
+        new_backup_folder_base = os.path.join(
+            section_config.get('backup_folder'),
+            section_config.get('folder_prefix') + \
+            datetime.datetime.now().strftime('%Y-%m-%dT%H:%M'))
 
         # Make directory to hold new backup
         n = 0
         while (1):
             if n > 0:
-                tmp_folder_name = new_backup_folder_base + str(n)
+                tmp_folder_name = new_backup_folder_base + '_' + str(n)
             else:
                 tmp_folder_name = new_backup_folder_base
             try:
@@ -273,17 +282,24 @@ class BackupManager:
                 n = n + 1
                 continue
 
+        return new_backup_folder_base
+
+    def _get_backup_folder_name(self, section_config, backup_folder_basename):
+        '''
+        Get full name of folder to hold new backups and create the folder in
+        the filesystem.
+        '''
         # Append name of directory to back up to the folder name (such that all
         # backups start with root at /)
-        if section.get('to_backup')[0] == '/':
-            self.log(section.get('to_backup')[1:])
-            new_backup_folder = os.path.join(new_backup_folder_base,
-                                             section.get('to_backup')[1:])
+        if section_config.get('to_backup')[0] == '/':
+            self.log(section_config.get('to_backup')[1:])
+            new_backup_folder = os.path.join(backup_folder_basename,
+                                             section_config.get('to_backup')[1:])
         else:
-            new_backup_folder = os.path.join(new_backup_folder_base,
-                                             section.get('to_backup'))
+            new_backup_folder = os.path.join(backup_folder_basename,
+                                             section_config.get('to_backup'))
 
-        self.log('New backup folder: ' + new_backup_folder)
+        # Make new backup folder
         try:
             os.makedirs(new_backup_folder)
         except FileExistsError:
@@ -293,30 +309,13 @@ class BackupManager:
         if new_backup_folder[-1] != '/':
             new_backup_folder = new_backup_folder + '/'
 
+        return new_backup_folder
 
-        # Get name of previous (symlinked) backup folder
-        symlink_latest_backup_folder = os.path.join(section.get('backup_folder'),
-                                      section.get('link_name'))
-
-        # Set up rsync command
-        shell_command = ['rsync', '-ax', '--log-file',
-                         section.get('logfile')]
-
-        # Check if symlink to previous backup exists
-        if os.path.isdir(symlink_latest_backup_folder):
-            shell_command.append('--link-dest=' + symlink_latest_backup_folder)
-
-        # Check if exclude file given
-        if len(section.get('exclude_file')) > 0 and \
-           os.path.exists(section.get('exclude_file')):
-            shell_command.append('--exclude-from=' + section.get('exclude_file'))
-
-        # Add source and destination
-        if section.get('to_backup') == '/':
-            shell_command.extend([section.get('to_backup'), new_backup_folder])
-        else:
-            shell_command.extend([section.get('to_backup') + '/', new_backup_folder])
-
+    def _run_shell_command(self, shell_command):
+        '''
+        Run a shell command given as an array of strings representing the
+        arguments to the command.
+        '''
         # Run shell command
         self.log('Running shell command: ' + ' '.join(shell_command))
         p = subprocess.Popen(' '.join(shell_command), shell=True)
@@ -324,19 +323,247 @@ class BackupManager:
 
         # Check return code and raise error if command did not succeed
         if p.returncode != 0:
-            raise RuntimeError('Making backups with rsync failed.')
+            raise RuntimeError('Shell command failed.')
 
+    def _replace_symlink(self, symlink_latest_backup_folder, new_backup_folder_base):
+        '''
+        Replace symlink given by symlink_latest_backup_folder with a relative
+        link of the same name pointing to new_backup_folder_base.
+        '''
         # Replace previous symlink
         try:
             os.unlink(symlink_latest_backup_folder)
         except FileNotFoundError:
             pass
 
-        os.symlink(os.path.relpath(os.path.join(new_backup_folder_base),
-                              os.path.dirname(symlink_latest_backup_folder)),
+        os.symlink(os.path.relpath(
+            os.path.join(new_backup_folder_base),
+            os.path.dirname(symlink_latest_backup_folder)),
                    symlink_latest_backup_folder)
 
+    def _add_exclude_and_log_files(self, section_config, shell_command):
+        '''
+        Add arguments for the exclude and logfiles to the rsync command given
+        in shell_command.
+        '''
+        # If logfile exists, use it.
+        if self.logfile is not None:
+            shell_command.extend(['--log-file',
+                                  section_config.get('logfile')])
+
+        # Check if exclude file given
+        if len(section_config.get('exclude_file')) > 0 and \
+                os.path.exists(section_config.get('exclude_file')):
+            shell_command.append('--exclude-from=' + section_config.get('exclude_file'))
+
+        return shell_command
+
+    def make_backup_incremental(self, section_config):
+        '''
+        Make single, incremental backup with hard links based on
+        section_config.
+        '''
+        # Get basename of backup folder
+        new_backup_folder_base = self._get_backup_folder_basename(
+            section_config)
+
+        # Get name of actual backup folder
+        new_backup_folder = self._get_backup_folder_name(section_config,
+                                                         new_backup_folder_base)
+        self.log('New backup folder: ' + new_backup_folder)
+
+        # Get name of previous (symlinked) backup folder
+        symlink_latest_backup_folder = os.path.join(section_config.get('backup_folder'),
+                                                    section_config.get('link_name'))
+
+        # Set up rsync command
+        shell_command = ['rsync', '-ax']
+
+        # If logfile exists, use it.
+        if self.logfile is not None:
+            shell_command.extend(['--log-file',
+                                  section_config.get('logfile')])
+
+        # Check if symlink to previous backup exists
+        if os.path.isdir(symlink_latest_backup_folder):
+            shell_command.append('--link-dest=' + symlink_latest_backup_folder)
+
+        # Check if exclude file given
+        if len(section_config.get('exclude_file')) > 0 and \
+                os.path.exists(section_config.get('exclude_file')):
+            shell_command.append('--exclude-from=' + section_config.get('exclude_file'))
+
+        # Add source and destination
+        if section_config.get('to_backup') == '/':
+            shell_command.extend([section_config.get('to_backup'), new_backup_folder])
+        else:
+            shell_command.extend([section_config.get('to_backup') + '/',
+                                  new_backup_folder])
+
+        # Run rsync command
+        self._run_shell_command(shell_command)
+
+        # Replace symlink
+        self._replace_symlink(symlink_latest_backup_folder,
+                              new_backup_folder_base)
+
         self.log('Backups succeeded.')
+
+    def make_backup_nolinks(self, section_config):
+        '''
+        Make single, incremental backup with no links based on section_config.
+        The new backup folder will contain a full backup, while the previous
+        folder will contain only files that were changed between the previous
+        and the current backup.
+        '''
+        # Get basename of backup folder
+        new_backup_folder_base = self._get_backup_folder_basename(
+            section_config)
+
+        # Get name of actual backup folder
+        new_backup_folder = self._get_backup_folder_name(section_config,
+                                                         new_backup_folder_base)
+        self.log('New backup folder: ' + new_backup_folder)
+
+        # Get name of previous (symlinked) backup folder
+        symlink_latest_backup_folder = os.path.join(section_config.get('backup_folder'),
+                                                    section_config.get('link_name'))
+
+        # Set up rsync command
+        shell_command = ['rsync', '-ax']
+
+        # Check if symlink to previous backup exists
+        if os.path.isdir(symlink_latest_backup_folder):
+            # Add option to make backups of changed files
+            shell_command.append('-b')
+
+            # Get name of last backup folder
+            previous_backup_folder_base = \
+                os.path.realpath(symlink_latest_backup_folder)
+
+            # Remove the new backup folder
+            shutil.rmtree(new_backup_folder_base)
+
+            # Move the previous backup folder to the new backup folder
+            os.rename(previous_backup_folder_base, new_backup_folder_base)
+
+            # Make a new empty directory matching the previous backup
+            # folder base
+            os.mkdir(previous_backup_folder_base)
+
+            # Get the actual previous backup folder
+            previous_backup_folder = self._get_backup_folder_name(
+                section_config, previous_backup_folder_base)
+
+            # Add previous backup folder as the backup dir for any deleted
+            # files
+            shell_command.extend(['--backup-dir', previous_backup_folder])
+
+        # Add exclude and log files
+        shell_command = self._add_exclude_and_log_files(section_config,
+                                                        shell_command)
+
+        # Add source and destination
+        if section_config.get('to_backup') == '/':
+            shell_command.extend([section_config.get('to_backup'), new_backup_folder])
+        else:
+            shell_command.extend([section_config.get('to_backup') + '/',
+                                  new_backup_folder])
+
+        # Run rsync command
+        self._run_shell_command(shell_command)
+
+        # Replace symlink
+        self._replace_symlink(symlink_latest_backup_folder,
+                              new_backup_folder_base)
+
+        self.log('Backups succeeded.')
+
+    def make_backup_snapshot(self, section_config):
+        '''
+        Make single, snapshot backup. A snapshot backup is an exact replica of
+        the directory being backed up, with no separate subdirectories for
+        changes made over time.
+        '''
+        # Get name of actual backup folder
+        new_backup_folder = section_config.get('backup_folder')
+        self.log('New backup folder: ' + new_backup_folder)
+
+        # Make sure new backup folder has trailing slash
+        if new_backup_folder[-1] != '/':
+            new_backup_folder += '/'
+
+        # Set up rsync command
+        shell_command = ['rsync', '-ax', '--delete']
+
+        # Add exclude and log files
+        shell_command = self._add_exclude_and_log_files(section_config,
+                                                        shell_command)
+
+        # Add source and destination
+        if section_config.get('to_backup') == '/':
+            shell_command.extend([section_config.get('to_backup'), new_backup_folder])
+        else:
+            shell_command.extend([section_config.get('to_backup') + '/',
+                                  new_backup_folder])
+
+        # Run rsync command
+        self._run_shell_command(shell_command)
+
+        self.log('Backups succeeded.')
+
+    def make_backup_full(self, section_config):
+        '''
+        Make a full copy of the directory being backed up.
+        '''
+        # Get basename of backup folder
+        new_backup_folder_base = self._get_backup_folder_basename(
+            section_config)
+
+        # Get name of actual backup folder
+        new_backup_folder = self._get_backup_folder_name(section_config,
+                                                         new_backup_folder_base)
+        self.log('New backup folder: ' + new_backup_folder)
+
+        # Get name of previous (symlinked) backup folder
+        symlink_latest_backup_folder = os.path.join(section_config.get('backup_folder'),
+                                                    section_config.get('link_name'))
+
+        # Set up rsync command
+        shell_command = ['rsync', '-ax']
+
+        # Add exclude and log files
+        shell_command = self._add_exclude_and_log_files(section_config,
+                                                        shell_command)
+
+        # Add source and destination
+        if section_config.get('to_backup') == '/':
+            shell_command.extend([section_config.get('to_backup'), new_backup_folder])
+        else:
+            shell_command.extend([section_config.get('to_backup') + '/',
+                                  new_backup_folder])
+
+        # Run rsync command
+        self._run_shell_command(shell_command)
+
+        # Replace symlink
+        self._replace_symlink(symlink_latest_backup_folder,
+                              new_backup_folder_base)
+
+        self.log('Backups succeeded.')
+
+    def make_backups(self, section_config):
+        if section_config.get('backup_type') == 'incremental':
+            self.make_backup_incremental(section_config)
+        elif section_config.get('backup_type') == 'nolinks':
+            self.make_backup_nolinks(section_config)
+        elif section_config.get('backup_type') == 'snapshot':
+            self.make_backup_snapshot(section_config)
+        elif section_config.get('backup_type') == 'full':
+            self.make_backup_full(section_config)
+        else:
+            self.log('Backup type {:s} not recognized.'.format(
+                section_config.get('backup_type')))
 
     def unmount_drive(self, section):
         '''
