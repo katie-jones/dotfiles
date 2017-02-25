@@ -180,6 +180,8 @@ class BackupManager:
         backup of a single directory.
         '''
 
+        backups_made = False
+
         # Run only if backup is outdate (needs to be run again) or if the force
         # option was given.
         if args.force_backup or self.backup_outdated(section):
@@ -204,7 +206,6 @@ class BackupManager:
                 traceback.print_exception(exc_type, exc_value, exc_traceback,
                                           limit=2, file=sys.stdout)
                 self.errlog(str(e))
-                backups_made = False
 
             finally:
                 # Unmount drive
