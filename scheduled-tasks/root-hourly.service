@@ -3,4 +3,4 @@ Description=Run root's hourly scripts
 
 [Service]
 Type=simple
-ExecStart=+/home/katie/linux-config/scheduled-tasks/root-hourly.sh
+ExecStart=+/usr/local/bin/root-hourly.sh

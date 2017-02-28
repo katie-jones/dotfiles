@@ -3,4 +3,4 @@ Description=Run root's daily scripts
 
 [Service]
 Type=simple
-ExecStart=+/home/katie/linux-config/scheduled-tasks/daily-daily.sh
+ExecStart=+/usr/local/bin/root-daily.sh
