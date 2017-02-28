@@ -28,10 +28,5 @@ qpdfview
 skype
 spotify
 st-patched
-teamdrive
 thermald
 update-pacman-mirrorlist
-urxvt-clipboard
-urxvt-font-size-git
-urxvt-fullscreen
-urxvt-tabbedex

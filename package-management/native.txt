@@ -156,6 +156,7 @@ xorg-server-devel
 xorg-utils
 xorg-xinit
 xorg-xinput
+xorg-xlsfonts
 xournal
 xterm
 yaourt
