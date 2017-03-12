@@ -58,11 +58,18 @@ getquestion() {
 }
 
 mkgrubcfg() {
+    echo "Making backup of previuos boot.efi"
     cp /mnt/shared/bootfiles/boot.efi /mnt/shared/bootfiles/boot.efi.old
+    echo "Making new grub config file..."
     mkgrubcfgfile && \
+        echo "Done." && \
+        echo "Making new grub standalone file..." && \
     mkgrubsa && \
+    echo "Done." && \
+    echo "Copying new standalone file to Mac boot partition..." && \
     sudo mount /mnt/efi && \
-    sudo cp -v /mnt/shared/bootfiles/boot.efi /mnt/efi/System/Library/CoreServices/ &&
+    sudo cp -v /mnt/shared/bootfiles/boot.efi /mnt/efi/System/Library/CoreServices/ && \
+    echo "Done." && \
     sudo umount /mnt/efi
 }
 
