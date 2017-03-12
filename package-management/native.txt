@@ -28,6 +28,7 @@ docker
 dosfstools
 doxygen
 dropbox
+dvd+rw-tools
 eclipse-cpp
 ecryptfs-utils
 elementary-icon-theme
@@ -71,6 +72,7 @@ libaccounts-glib
 libdbusmenu-gtk2
 libdbusmenu-gtk3
 libgcrypt15
+libisoburn
 liblxqt
 libreoffice-fresh
 libsignon-glib
@@ -86,6 +88,7 @@ mercurial
 mesa-demos
 nano
 netctl
+network-manager-applet
 networkmanager
 nss-mdns
 openconnect
@@ -100,6 +103,7 @@ poco
 powertop
 pptpclient
 print-manager
+procps-ng
 pwgen
 python-coverage
 python-kivy
@@ -124,6 +128,7 @@ seahorse
 shotwell
 simple-scan
 slim
+speech-dispatcher
 sudo
 swt
 system-config-printer
@@ -138,7 +143,6 @@ vala
 valgrind
 vi
 vim
-virtualbox
 vlc
 weston
 wget

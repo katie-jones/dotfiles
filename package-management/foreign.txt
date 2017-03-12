@@ -7,9 +7,9 @@ diffmerge
 drive
 extcalc
 ffmpeg0.10
-google-chrome
 gpu-switch
 hfsutils
+ink-git
 librealsense
 log4cxx
 mbpfan-git
