@@ -1,28 +1,31 @@
 #!/usr/bin/python3
 
-import run_backups
-from run_backups import BackupManager
+import ink
+import argparse
 import subprocess
 import sys
+import time
 
 def main():
-    args = run_backups.parse_args(sys.argv[1:])
-    backup_manager = BackupManager(args)
+    # Arg 1 should always be the update type -- parsed by local parser
+    update_args = parse_args(sys.argv[1:2])
+
+    # Args after 1 should be parsed by the run_backups arg parser
+    backup_manager = ink.BackupManager(sys.argv[2:])
 
     # Assume system backup is not up-to-date
     system_backup_status = 'not found'
 
     # Loop through sections to find full system backup
-    for section in backup_manager.global_config:
-        section_config = backup_manager.global_config[section]
-
+    print('Checking for up to date system backup...')
+    for backup_instance in backup_manager.backup_instances:
         # Look for full system backup
-        if section_config.get('to_backup') == '/':
-            # Check if the backup is up-to-date
-            if backup_manager.backup_outdated(section_config):
-                system_backup_status = 'outdated'
-            else:
+        if backup_instance.to_backup == '/':
+            system_backup_status = 'outdated'
+            # Check if the backup is within 24 hours
+            if backup_instance.last_backup > time.time() - 24 * 60 * 60:
                 system_backup_status = 'up to date'
+                break
 
     if system_backup_status == 'not found':
         print('No full system backup was found. Not continuing with update.')
