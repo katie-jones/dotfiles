@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# Run backups (script checks timestamps -- backups aren't actually generate 
+# Run backups (script checks timestamps -- backups aren't actually generated
 # each hour)
-/home/katie/linux-config/scripts/run_backups.py
+run_ink
