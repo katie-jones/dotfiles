@@ -1,0 +1,6 @@
+[Unit]
+Description=Run root's daily scripts
+
+[Service]
+Type=simple
+ExecStart=+/usr/local/bin/root-daily.sh
