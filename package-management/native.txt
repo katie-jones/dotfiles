@@ -36,6 +36,7 @@ enlightenment
 evince
 exfat-utils
 fbterm
+firefox
 flashplugin
 flex
 foomatic-db
@@ -60,6 +61,7 @@ gutenprint
 gv
 hfsprogs
 htop
+inkscape
 iputils
 ipython
 jfsutils
@@ -117,7 +119,6 @@ python2-yaml
 qt-gstreamer
 qt5-wayland
 qtcreator
-redshift
 reiserfsprogs
 ristretto
 rsync
