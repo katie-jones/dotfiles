@@ -10,18 +10,6 @@ folder_prefix=home-
 frequency_seconds=86400
 backup_type=incremental
 
-[home-nolinks]
-mount_point=/mnt/backups/home
-backup_folder=/mnt/backups/home
-to_backup=/home
-exclude_file=/home/katie/linux-config/custom-config/home_excludes
-logfile=/var/log/ink/home.log
-errfile=/var/log/ink/home.err
-link_name=current
-folder_prefix=home-
-frequency_seconds=7200
-backup_type=nolinks
-
 [full]
 mount_point=/mnt/backups/root
 backup_folder=/mnt/backups/root
@@ -31,20 +19,8 @@ logfile=/var/log/backups/full.log
 errfile=/var/log/backups/full.err
 link_name=current
 folder_prefix=full-
-frequency_seconds=604800
-backup_type=incremental
-
-[full-nolinks]
-mount_point=/mnt/backups/root
-backup_folder=/mnt/backups/root
-to_backup=/
-exclude_file=/home/katie/linux-config/custom-config/full_excludes
-logfile=/var/log/backups/full.log
-errfile=/var/log/backups/full.err
-link_name=current
-folder_prefix=full-
 frequency_seconds=86400
-backup_type=nolinks
+backup_type=incremental
 
 [shared]
 mount_point=/mnt/backups/shared
