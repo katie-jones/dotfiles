@@ -24,3 +24,10 @@ Read file line by line:
 while read line; do
   echo $line
 done < myfile.txt
+```
+
+
+Get disk usage of all (including hidden) directories:
+```bash
+du -ahd1 (directory) | sort -h
+```
