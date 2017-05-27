@@ -9,6 +9,7 @@
 /katie/shared
 /katie/packages/linux*
 /katie/work
+/katie/scratch
 /*/.cache
 /*/.local/share/Trash/*
 /katie/linux-config
@@ -19,3 +20,5 @@
 .fseventsd
 .DS_Store
 .DocumentRevisions*
+/katie/.config/chromium
+/katie/.config/google-chrome
