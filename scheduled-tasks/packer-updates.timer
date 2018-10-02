@@ -1,0 +1,9 @@
+[Unit]
+Description=Run safe packer updates daily
+
+[Timer]
+OnBootSec=45min
+OnUnitActiveSec=1d
+
+[Install]
+WantedBy=timers.target

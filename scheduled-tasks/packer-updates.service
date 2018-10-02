@@ -1,0 +1,7 @@
+[Unit]
+Description=Run safe packer updates
+
+[Service]
+Type=simple
+User=kiki
+ExecStart=/path/to/safe_updates.py packer

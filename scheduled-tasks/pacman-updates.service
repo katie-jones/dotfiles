@@ -1,0 +1,6 @@
+[Unit]
+Description=Run safe pacman updates
+
+[Service]
+Type=simple
+ExecStart=+/path/to/safe_updates.py pacman

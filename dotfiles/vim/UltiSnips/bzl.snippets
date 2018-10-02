@@ -1,0 +1,25 @@
+snippet header1 "First level header" b
+# ==============================================================================
+# `!p
+from math import floor,ceil
+snip.rv = ' ' * int(ceil(-2 + (80 - len(t[1])) / 2.0))
+`${1:${VISUAL:Header}}
+# ==============================================================================
+$0
+endsnippet
+
+snippet header2 "Second level header" b
+# ------------------------------------------------------------------------------
+# `!p
+from math import floor,ceil
+snip.rv = ' ' * int(ceil(-2 + (80 - len(t[1])) / 2.0))
+`${1:${VISUAL:Header}}
+# ------------------------------------------------------------------------------
+$0
+endsnippet
+
+snippet header3 "Third level header" b
+# ${1:Header}
+# ------------------------------------------------------------------------------
+$0
+endsnippet

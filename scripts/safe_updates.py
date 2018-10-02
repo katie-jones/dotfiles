@@ -1,10 +1,25 @@
 #!/usr/bin/python3
 
-import ink
 import argparse
 import subprocess
 import sys
 import time
+import importlib.util
+import ink
+
+
+def parse_args(argv):
+    '''
+    Parse command line arguments.
+    '''
+    parser = argparse.ArgumentParser(description='Update if backups are '
+                                     'up-to-date.')
+    parser.add_argument(
+        'update_type',
+        choices=['packer', 'pacman'],
+        default='pacman',
+        help='Type of update to perform (packer or pacman).')
+
 
 def parse_args(argv):
     '''
@@ -12,17 +27,20 @@ def parse_args(argv):
     '''
     parser = argparse.ArgumentParser(description='Run updates if an up-to-date'
                                      ' backup exists.')
-    parser.add_argument('update_type', action='store',
-                        choices=['packer', 'pacman'],
-                        help='Type of update to run (pacman or packer).')
+    parser.add_argument(
+        'update_type',
+        action='store',
+        choices=['packer', 'pacman'],
+        help='Type of update to run (pacman or packer).')
     return parser.parse_args(argv)
+
 
 def main():
     # Arg 1 should always be the update type -- parsed by local parser
     update_args = parse_args(sys.argv[1:2])
 
     # Args after 1 should be parsed by the run_backups arg parser
-    backup_manager = ink.BackupManager(sys.argv[2:])
+    backup_manager = ink.BackupManager(ink.parse_args(sys.argv[2:]))
 
     # Assume system backup is not up-to-date
     system_backup_status = 'not found'
@@ -54,10 +72,10 @@ def main():
             shell_command = 'packer -Suy --auronly --noconfirm'
         else:
             print('Update type {:s} not recognized.'.format(
-                      update_args.update_type))
+                update_args.update_type))
             return 1
 
-        p = subprocess.Popen(shell_command, shell = True)
+        p = subprocess.Popen(shell_command, shell=True)
         p.communicate()
         if p.returncode == 0:
             print('Update succeeded.')
@@ -65,6 +83,7 @@ def main():
         else:
             print('Error occurred during update.')
             return 1
+
 
 if __name__ == "__main__":
     sys.exit(main())

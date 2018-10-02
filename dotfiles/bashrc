@@ -123,3 +123,6 @@ fi
 # Source ssh_find_agent script and start ssh-agent if not running
 . ~/linux-config/scripts/ssh-find-agent/ssh-find-agent.sh
 ssh-find-agent -a || eval $(ssh-agent) > /dev/null
+
+# TEMP: Add rpi xcompile tools to path
+export PATH=/home/katie/scratch/rpi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin:$PATH

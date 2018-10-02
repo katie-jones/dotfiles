@@ -9,3 +9,33 @@ snippet funcdef "Add function definitions section" b
 ${0:functions}
 /*------------------------- END FUNCTION DEFINITIONS -------------------------*/
 endsnippet
+
+snippet header1 "First level header" b
+/* ========================================================================== */
+/* `!p
+from math import floor,ceil
+snip.rv = ' ' * int(ceil((72 - len(t[1])) / 2.0))
+` ${1:${VISUAL:Header}} `!p
+snip.rv = ' ' * int(floor((72 - len(t[1])) / 2.0))
+` */
+/* ========================================================================== */
+$0
+endsnippet
+
+snippet header2 "Second level header"
+/* -------------------------------------------------------------------------- */
+/* `!p
+from math import floor,ceil
+snip.rv = ' ' * int(ceil((72 - len(t[1])) / 2.0))
+` ${1:${VISUAL:Header}} `!p
+snip.rv = ' ' * int(floor((72 - len(t[1])) / 2.0))
+` */
+/* -------------------------------------------------------------------------- */
+$0
+endsnippet
+
+snippet header3 "Third level header"
+// ${1:${VISUAL:Header}}
+// -----------------------------------------------------------------------------
+$0
+endsnippet

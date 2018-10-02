@@ -16,7 +16,7 @@ Plugin 'rhysd/vim-clang-format' "use clang-format in vim
 Plugin 'bkad/CamelCaseMotion' " move using camel case
 Plugin 'scrooloose/nerdcommenter' " kbd shortcuts for commenting
 Plugin 'tmux-plugins/vim-tmux' " for tmux conf file
-Plugin 'Valloric/YouCompleteMe' " for code completion
+" Plugin 'Valloric/YouCompleteMe' " for code completion
 Plugin 'scrooloose/nerdtree' " for directory navigation
 Plugin 'jistr/vim-nerdtree-tabs' " for using nerdtree with tabs in vim
 Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
@@ -79,6 +79,24 @@ set expandtab
 " Enable codefmt's default mappings on the <Leader>= prefix.
 Glaive codefmt plugin[mappings]
 
+" Enable autoformatting
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+augroup END
+
+" Set yapf to use google style
+" Glaive codefmt yapf_executable='yapf --style=google'
+
+" Not codefmt but similar to format XML files
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+
 " ---------------------------------------------
 " ----------------- NERD SHIT -----------------
 " ---------------------------------------------
@@ -111,6 +129,12 @@ map <Leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " disable YCM for tex files
 let g:ycm_filetype_blacklist = { 'tex' : 1 }
+
+" Add global config file
+let g:ycm_global_ycm_extra_conf = '/usr/share/vim/vimfiles/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+" Set to use python2
+let g:ycm_server_python_interpreter = '/usr/bin/python2'
 
 " ---------------------------------------------
 " --------------- TEMPLATE SHIT ---------------
