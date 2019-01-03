@@ -43,38 +43,6 @@ ${0:functions}
 /*------------------------- END FUNCTION DEFINITIONS -------------------------*/
 endsnippet
 
-snippet testf "Test fixture (googletest)" b
-TEST_F(${1:Test category}, ${2:Test name}) {
-${0}
-}
-endsnippet
-
-snippet test "Simple test (googletest)" b
-TEST(${1:Test category}, ${2:Test name}) {
-${0}
-}
-endsnippet
-
-snippet unittestclass "Class for unit test" b
-class ${1:ClassName}UnitTest : public ::testing::Test${2:, public $1TestFixture} {
-	public:
-		$1UnitTest() : $1TestFixture(${3}) {}
-};
-endsnippet
-
-snippet namespace "Namespace block"
-namespace ${1:name} {
-${0:${VISUAL}}
-}  // namespace $1
-endsnippet
-
-snippet templatef "Templated class function" 
-template <${1:typename T}>
-${2:modifiers} ${3:ClassName}<`!p snip.rv = t[1].replace("typename ","")`>::${4}(${5}) {
-${0}
-}
-endsnippet
-
 snippet commentline "Insert a line-long comment block" b
 /*`!p import math
 snip.rv = '-' * math.floor((74 - len(t[1]))/2)` `!p snip.rv = t[1].upper()` `!p import math
@@ -89,17 +57,4 @@ snip.rv = '-' * math.floor((74 - len(t[1]))/2)` `!p snip.rv = t[1].upper()` `!p 
 snip.rv = '-' * math.ceil((74 - len(t[1]))/2)`*/
 /*----------------------------------------------------------------------------*/
 ${1:comment}
-endsnippet
-
-snippet r2catch "Catch statement for R2" 
-catch (const Exceptions::${1:Name}& e) {
-error_code_ = ErrorCode::k$1;
-ErrorHandler<EventType, Exceptions::$1> error_handler;
-error_handler(*this, event, e);
-}
-endsnippet
-
-snippet cast "Static cast variable" i
-static_cast<${1:type}>(${VISUAL:variable})
-$0
 endsnippet

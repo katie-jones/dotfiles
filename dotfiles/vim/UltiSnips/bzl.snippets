@@ -1,0 +1,59 @@
+snippet header1 "First level header" b
+# ==============================================================================
+# `!p import math
+snip.rv = ' ' * math.floor((76 - len(t[1]))/2)` ${1:Header} `!p import math
+snip.rv = ' ' * math.ceil((76 - len(t[1]))/2)`
+# ==============================================================================
+${0}
+endsnippet
+
+snippet header2 "Second level header" b
+# ------------------------------------------------------------------------------
+# `!p import math
+snip.rv = ' ' * math.floor((76 - len(t[1]))/2)` ${1:Header} `!p import math
+snip.rv = ' ' * math.ceil((76 - len(t[1]))/2)`
+# ------------------------------------------------------------------------------
+${0}
+endsnippet
+
+snippet header3 "Third level header" b
+# ${1:Header}
+# ------------------------------------------------------------------------------
+${0}
+endsnippet
+
+snippet cctest "C++ bazel test" b
+cc_test(
+    name = "${1:unit_test}",
+    size = "${2:small}",
+    srcs = [
+        "${3:_unit}_test.cpp",
+    ],
+    copts = global_copts,
+    tags = ["unit_test"],
+    deps = [
+        "@gtest//:main",
+        "@gtest//:mock",
+		"${4:deps}",
+    ],
+)
+$0
+endsnippet
+
+snippet cclib "C++ bazel library" b
+cc_library(
+    name = "${1:name}",
+    srcs = [
+        "${2:$1}.cpp",
+    ],
+    hdrs = [
+        "$2.hpp",
+    ],
+    copts = global_copts,
+    visibility = ["//visibility:public"],
+    deps = [
+        "${3:deps}",
+    ],
+)
+$0
+endsnippet

@@ -1,0 +1,60 @@
+snippet ghead1 "First level header" b
+# ==============================================================================
+# `!p import math
+snip.rv = ' ' * math.floor((76 - len(t[1]))/2)` ${1:${VISUAL:Header}} `!p import math
+snip.rv = ' ' * math.ceil((76 - len(t[1]))/2)`
+# ==============================================================================
+${0}
+endsnippet
+
+snippet ghead2 "Second level header" b
+# ------------------------------------------------------------------------------
+# `!p import math
+snip.rv = ' ' * math.floor((76 - len(t[1]))/2)` ${1:${VISUAL:Header}} `!p import math
+snip.rv = ' ' * math.ceil((76 - len(t[1]))/2)`
+# ------------------------------------------------------------------------------
+${0}
+endsnippet
+
+snippet ghead3 "Third level header" b
+# ${1:${VISUAL:Header}}
+# ------------------------------------------------------------------------------
+${0}
+endsnippet
+
+snippet mirror "Mirror left/right" i
+`!p
+placeholder = 'xxx$#@!!@#$$#@!!@#$xxx'
+temp = snip.v.text.replace('left', placeholder.lower()).replace('Left', placeholder.capitalize()).replace('LEFT', placeholder.upper())
+temp2 = temp.replace('right', 'left').replace('Right', 'Left').replace('RIGHT', 'LEFT')
+snip.rv = snip.v.text.lstrip(' ') + temp2.replace(placeholder.lower(), 'right').replace(placeholder.capitalize(), 'Right').replace(placeholder.upper(), 'RIGHT')
+`
+endsnippet
+
+snippet mirlow "Mirror left/right and upper/lower" i
+`!p
+snip.rv = snip.v.text
+
+if 'lower' in snip.rv.lower():
+    snip.rv = snip.rv  + snip.rv.replace('lower', 'upper').replace('Lower', 'Upper').replace('LOWER', 'UPPER')
+elif 'upper' in snip.rv.lower():
+    snip.rv = snip.rv  + snip.rv.replace('upper', 'lower').replace('Upper', 'Lower').replace('UPPER', 'LOWER')
+
+if 'left' in snip.rv.lower():
+    snip.rv = snip.rv  + snip.rv.replace('left', 'right').replace('Left', 'Right').replace('LEFT', 'RIGHT')
+elif 'right' in snip.rv.lower():
+    snip.rv = snip.rv  + snip.rv.replace('right', 'left').replace('Right', 'Left').replace('RIGHT', 'LEFT')
+
+snip.rv = snip.rv.lstrip(' ')
+`
+endsnippet
+
+snippet minmax "Mirror min/max" b
+`!p
+snip.rv = snip.v.text
+new_text = snip.rv.replace('min', 'x*x*x*x*').replace('Min', 'X*X*X*X*')
+new_text = new_text.replace('max', 'min').replace('Max', 'Min')
+new_text = new_text.replace('x*x*x*x*', 'max').replace('X*X*X*X*', 'Max')
+snip.rv = snip.rv + '\n' + new_text
+`
+endsnippet

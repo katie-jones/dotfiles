@@ -20,18 +20,24 @@ Plugin 'Valloric/YouCompleteMe' " for code completion
 Plugin 'scrooloose/nerdtree' " for directory navigation
 Plugin 'jistr/vim-nerdtree-tabs' " for using nerdtree with tabs in vim
 Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
-Plugin 'scrooloose/syntastic' " syntax highlighting
-Plugin 'nvie/vim-flake8' " PEP 8 syntax highlighting
+" Plugin 'scrooloose/syntastic' " syntax highlighting
 Plugin 'tmhedberg/SimpylFold' " python code folding
-Plugin 'Vimjas/vim-python-pep8-indent' " python indentation
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'} " status bar
 Plugin 'aperezdc/vim-template' " template files
 Plugin 'vim-scripts/DoxygenToolkit.vim' " doxygen shortcuts
 Plugin 'SirVer/ultisnips' " Engine for inserting code snippets
 Plugin 'honza/vim-snippets' " Code snippets
 Plugin 'tpope/vim-surround' " Surround with quotes, brackets, tags etc.
+Plugin 'tpope/vim-fugitive' " Git plugin for vim
+
+" Add plugins for code formatting
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
+Plugin 'google/vim-glaive'
 
 call vundle#end()
+call glaive#Install()
+
 filetype plugin indent on
 
 " ---------------------------------------------
@@ -65,6 +71,24 @@ let mapleader = ","
 " highlight long lines
 highlight ColorColumn ctermbg=blue guibg=blue
 call matchadd('ColorColumn', '\%80v', 100)
+
+" ---------------------------------------------
+" ---------------- CODEFMT SHIT ---------------
+" ---------------------------------------------
+Glaive codefmt plugin[mappings]
+
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+augroup END
+
+au BufReadPost * if getline(1) =~ "# codefmt-disable" | let b:codefmt_auto_format_buffer = 0 | endif
 
 " ---------------------------------------------
 " ----------------- NERD SHIT -----------------
@@ -125,8 +149,23 @@ let g:email = 'katie.jones@reactive-robotics.com'
 let g:UltiSnipsUsePythonVersion = 3 " vim is compiled with python3
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsExpandTrigger="<c-g>"
-let g:UltiSnipsListSnippets="<c-h>"
+let g:UltiSnipsListSnippets="<c-n>"
 let g:UltiSnipsSnippetDirectories = ['/home/katie/.vim/UltiSnips', 'UltiSnips']
+
+" Add snippets for local buffer
+function! s:AddSnippets(newdir)
+   let b:restore = get(g:, 'UltiSnipsSnippetDirectories', [])
+   let g:UltiSnipsSnippetDirectories = b:restore + [a:newdir]
+endfunction
+
+function s:RestoreSnippets()
+   let g:UltiSnipsSnippetDirectories = b:restore
+endfunction
+
+augroup DedicatedSnippets
+  au BufEnter * call s:AddSnippets(fnamemodify(expand('<afile>'), ':p:h'))
+  au BufLeave * call s:RestoreSnippets()
+augroup END
 
 " ---------------------------------------------
 " ---------------- FILE TYPES -----------------
@@ -190,6 +229,8 @@ vnoremap <space> zf
 " paste toggle
 set pastetoggle=<F2>
 
+" Change to DOS line endings.
+nnoremap <Leader>cwl :update<CR> :e ++ff=dos<CR> :w<CR>
 
 " ---------------------------------------------
 " --------------- LATEX SUITE -----------------

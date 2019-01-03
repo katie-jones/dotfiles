@@ -26,3 +26,6 @@ set foldmethod=expr
 
 " DoxygenToolkit
 let g:DoxygenToolkit_briefTag_pre=""
+
+" Let clang-format use Google style
+Glaive codefmt clang_format_style=google

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=st
+GenericName=st
+Comment=Use the command line
+Exec=st
+Icon=utilities-terminal
+Type=Application
+Categories=System;TerminalEmulator;

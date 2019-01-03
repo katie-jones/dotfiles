@@ -1,0 +1,23 @@
+snippet header1 "First level header" b
+# ==============================================================================
+# `!p import math
+snip.rv = ' ' * math.floor((76 - len(t[1]))/2)` ${1:Header} `!p import math
+snip.rv = ' ' * math.ceil((76 - len(t[1]))/2)`
+# ==============================================================================
+${0}
+endsnippet
+
+snippet header2 "Second level header" b
+# ------------------------------------------------------------------------------
+# `!p import math
+snip.rv = ' ' * math.floor((76 - len(t[1]))/2)` ${1:Header} `!p import math
+snip.rv = ' ' * math.ceil((76 - len(t[1]))/2)`
+# ------------------------------------------------------------------------------
+${0}
+endsnippet
+
+snippet header3 "Third level header" b
+# ${1:Header}
+# ------------------------------------------------------------------------------
+${0}
+endsnippet

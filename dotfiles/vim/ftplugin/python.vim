@@ -21,3 +21,5 @@ map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
 map <silent> ge <Plug>CamelCaseMotion_ge
 
+" Disable auto line breaks
+set textwidth=0

@@ -1,0 +1,10 @@
+snippet mirror "Mirror left/right and upper/lower"
+`!p
+text=snip.v.text
+if 'left' in text.lower():
+	text += text.replace('left', 'right').replace('Left', 'Right')
+
+if 'lower' in text.lower():
+	text += text.replace('lower', 'upper').replace('Lower', 'Upper')
+snip.rv=text`
+endsnippet
