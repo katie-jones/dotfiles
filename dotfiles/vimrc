@@ -29,6 +29,7 @@ Plugin 'SirVer/ultisnips' " Engine for inserting code snippets
 Plugin 'honza/vim-snippets' " Code snippets
 Plugin 'tpope/vim-surround' " Surround with quotes, brackets, tags etc.
 Plugin 'tpope/vim-fugitive' " Git plugin for vim
+Plugin 'fatih/vim-go' " Go syntax highlighting etc.
 
 " Add plugins for code formatting
 Plugin 'google/vim-maktaba'
@@ -38,11 +39,13 @@ Plugin 'google/vim-glaive'
 call vundle#end()
 call glaive#Install()
 
-filetype plugin indent on
+
 
 " ---------------------------------------------
 " ---------------- BASIC SETUP ----------------
 " ---------------------------------------------
+
+filetype plugin indent on
 
 syntax enable
 set background=light
@@ -141,6 +144,9 @@ let g:username = 'Katie Jones'
 
 " Default email address
 let g:email = 'katie.jones@reactive-robotics.com'
+
+" Disable vim-go auto templates.
+let g:go_template_autocreate = 0
 
 " ---------------------------------------------
 " -------------- ULTISNIPS SHIT ---------------
