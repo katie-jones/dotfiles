@@ -22,6 +22,12 @@ Perform a command in all buffers:
 :bufdo (command)
 ```
 
+Perform search on all lines containing XY, replacing abc with def
+g/XY/ | s/abc/def/g
+
+Copy all lines containing XY, then perform search on them, replacing XY with XZ.
+g/XY/ copy . | s/XY/XZ/g
+
 # Bash
 --------------------------------------------------
 Read file line by line:
