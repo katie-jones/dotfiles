@@ -29,7 +29,7 @@ export PATH=$GOPATH:$GOPATH/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
 # Solarized colors in console
-source ~/stuff/linux-config/custom-config/solarized_dark
+source ~/Stuff/linux-config/custom-config/solarized_dark
 
 # visual bell
 set bell-style visible
