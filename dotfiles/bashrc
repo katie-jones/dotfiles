@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+alias ls='ls --color=auto --block-size=M'
 alias ll='ls -l'
 alias grep='grep --color=auto'
 
@@ -65,3 +65,5 @@ repo_name="$1"
 echo "Cloning repository $repo_name"
 git clone "git@bitbucket.org:reactive-robotics/$repo_name.git"
 }
+
+setxkbmap -layout kj
