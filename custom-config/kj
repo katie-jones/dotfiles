@@ -1,8 +1,6 @@
 default
 xkb_symbols "basic" {
 
-//    include "latin(type4)"
-
     name[Group1]="English (KJ)";
 
     key <TLDE> {	[     grave,	asciitilde	, degree, degree ]	};
@@ -55,10 +53,10 @@ xkb_symbols "basic" {
     key <AB09> {	[    period,	greater		, egrave, Egrave ]	};
     key <AB10> {	[     slash,	question	, agrave, Agrave ]	};
 
-    key <BKSL> {	[ backslash,         bar	, ae, AE ]	};
+    key <BKSL> {	[ backslash,	bar		, ae, AE ]	};
+    key <SPCE> {	[ space,	space		, space, space ] };
 
     include "altwin(swap_alt_win)"
     include "level3(lwin_switch)"
-    include "group(win_space_toggle)"
     include "capslock(f13)"
 };
