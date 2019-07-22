@@ -67,3 +67,9 @@ git clone "git@bitbucket.org:reactive-robotics/$repo_name.git"
 }
 
 setxkbmap -layout kj
+
+# Chromium extensions.
+# ------------------------------------------------------------------------------
+get-chromium-extension-url() {
+echo "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=72.0&x=id%3D$1%26installsource%3Dondemand%26uc" | xclip -sel clip
+}
