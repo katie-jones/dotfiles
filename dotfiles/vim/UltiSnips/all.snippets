@@ -1,8 +1,8 @@
 snippet ghead1 "First level header" b
 # ==============================================================================
 # `!p import math
-snip.rv = ' ' * math.floor((76 - len(t[1]))/2)` ${1:${VISUAL:Header}} `!p import math
-snip.rv = ' ' * math.ceil((76 - len(t[1]))/2)`
+snip.rv = ' ' * int(math.floor((76 - len(t[1]))/2))` ${1:${VISUAL:Header}} `!p import math
+snip.rv = ' ' * int(math.ceil((76 - len(t[1]))/2))`
 # ==============================================================================
 ${0}
 endsnippet
@@ -10,8 +10,8 @@ endsnippet
 snippet ghead2 "Second level header" b
 # ------------------------------------------------------------------------------
 # `!p import math
-snip.rv = ' ' * math.floor((76 - len(t[1]))/2)` ${1:${VISUAL:Header}} `!p import math
-snip.rv = ' ' * math.ceil((76 - len(t[1]))/2)`
+snip.rv = ' ' * int(math.floor((76 - len(t[1]))/2))` ${1:${VISUAL:Header}} `!p import math
+snip.rv = ' ' * int(math.ceil((76 - len(t[1]))/2))`
 # ------------------------------------------------------------------------------
 ${0}
 endsnippet

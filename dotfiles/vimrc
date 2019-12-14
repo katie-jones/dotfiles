@@ -16,7 +16,7 @@ Plugin 'rhysd/vim-clang-format' "use clang-format in vim
 Plugin 'bkad/CamelCaseMotion' " move using camel case
 Plugin 'scrooloose/nerdcommenter' " kbd shortcuts for commenting
 Plugin 'tmux-plugins/vim-tmux' " for tmux conf file
-Plugin 'Valloric/YouCompleteMe' " for code completion
+" Plugin 'Valloric/YouCompleteMe' " for code completion
 Plugin 'scrooloose/nerdtree' " for directory navigation
 Plugin 'jistr/vim-nerdtree-tabs' " for using nerdtree with tabs in vim
 Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
@@ -75,6 +75,16 @@ let mapleader = ","
 highlight ColorColumn ctermbg=blue guibg=blue
 call matchadd('ColorColumn', '\%80v', 100)
 
+" Status line.
+set laststatus=2
+set statusline+=%{FugitiveStatusline()}
+
+" Enable undo/redo after save.
+if has('persistent_undo')      "check if your vim version supports it
+  set undofile                 "turn on the feature
+  set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
+endif
+
 " ---------------------------------------------
 " ---------------- CODEFMT SHIT ---------------
 " ---------------------------------------------
@@ -92,6 +102,9 @@ augroup autoformat_settings
 augroup END
 
 au BufReadPost * if getline(1) =~ "# codefmt-disable" | let b:codefmt_auto_format_buffer = 0 | endif
+
+" Use google yapf style.
+Glaive codefmt yapf_executable='/home/katie/anaconda3/bin/yapf'
 
 " ---------------------------------------------
 " ----------------- NERD SHIT -----------------
@@ -126,6 +139,9 @@ map <Leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " disable YCM for tex files
 let g:ycm_filetype_blacklist = { 'tex' : 1 }
 
+" Use system (not conda) Python.
+let g:ycm_server_python_interpreter = '/usr/bin/python3.7'
+
 " ---------------------------------------------
 " --------------- TEMPLATE SHIT ---------------
 " ---------------------------------------------
@@ -152,7 +168,7 @@ let g:go_template_autocreate = 0
 " -------------- ULTISNIPS SHIT ---------------
 " ---------------------------------------------
 
-let g:UltiSnipsUsePythonVersion = 3 " vim is compiled with python3
+let g:UltiSnipsUsePythonVersion = 2 " vim is compiled with python3
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsExpandTrigger="<c-g>"
 let g:UltiSnipsListSnippets="<c-n>"
