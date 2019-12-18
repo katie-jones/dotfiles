@@ -238,6 +238,10 @@ set pastetoggle=<F2>
 " Change to DOS line endings.
 nnoremap <Leader>cwl :update<CR> :e ++ff=dos<CR> :w<CR>
 
+" Copy/paste selected to/from clipboard.
+noremap <Leader>y "+y
+noremap <Leader>p "+p
+
 " ---------------------------------------------
 " --------------- LATEX SUITE -----------------
 " ---------------------------------------------
@@ -250,4 +254,3 @@ let g:tex_flavor='latex'
 
 " compile with pdflatex by default
 let g:Tex_DefaultTargetFormat='pdf'
-
