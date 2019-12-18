@@ -73,3 +73,15 @@ setxkbmap -layout kj
 get-chromium-extension-url() {
 echo "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=72.0&x=id%3D$1%26installsource%3Dondemand%26uc" | xclip -sel clip
 }
+
+# Unlock SIM card and disable PIN.
+# ------------------------------------------------------------------------------
+unlock-sim() {
+    mmcli -i 0 --pin=$1 --disable-pin
+}
+
+# Shortcuts.
+# ------------------------------------------------------------------------------
+alias vcomm='cd ~/VirtualBox/Shared/vemo-commissioning/R-2_Commissioning/Calibration'
+alias cman='cd ~/VirtualBox/Shared/vemo-commissioning/Manual'
+alias ssdo='ssh katie@165.227.154.80'
