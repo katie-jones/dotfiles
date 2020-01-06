@@ -2,6 +2,7 @@
 
 import os
 
+
 def main():
     # Get HOME directory
     home_dir = os.environ.get("HOME")
@@ -11,20 +12,22 @@ def main():
         return
 
     # List files to link
-    dotfiles = ["dotfiles/bashrc",
-                "dotfiles/latexmkrc",
-                "dotfiles/tmux.conf",
-                "dotfiles/vimrc",
-                "dotfiles/vim",
-                "dotfiles/xbindkeysrc",
-                "xinit-config/xinit_deepin",
-                "xinit-config/xinit_lxqt",
-                "xinit-config/xinit_xfce"
-               ]
+    dotfiles = [
+        "dotfiles/bashrc",
+        "dotfiles/latexmkrc",
+        "dotfiles/tmux.conf",
+        "dotfiles/vimrc",
+        "dotfiles/vim",
+        "dotfiles/xbindkeysrc",
+        "xinit-config/xinit_deepin",
+        "xinit-config/xinit_lxqt",
+        "xinit-config/xinit_xfce",
+        "dotfiles/gitconfig",
+    ]
 
     # Get directory of linux-config
-    dotfiles_dir = os.path.realpath(os.path.dirname(os.path.realpath(__file__))
-                                    + '/..')
+    dotfiles_dir = os.path.realpath(
+        os.path.dirname(os.path.realpath(__file__)) + '/..')
 
     # Loop through each file to create link
     for dotfile in dotfiles:
@@ -69,6 +72,7 @@ def main():
             print('An error occurred. Skipping this file.')
 
     print('Success!')
+
 
 if __name__ == "__main__":
     main()

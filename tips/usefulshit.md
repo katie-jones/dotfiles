@@ -50,4 +50,15 @@ Print sorted list of all large, duplicate files in a directory (where 10000000 i
 
 Enable all keyboard layouts: gsettings set org.gnome.desktop.input-sources show-all-sources true
 
+# DigitalOcean Droplet Setup
 
+1. Create droplet and add SSH key during create.
+1. SSH into droplet as root.
+1. Add new user account: `adduser myname`.
+1. Add user to sudo group for sudo access: `usermod -aG sudo myname`.
+1. Copy SSH authorized keys to new user: `mkdir /home/myname/.ssh && cp ~/.ssh/authorized_keys /home/myname/.ssh && chown -R myname:myname /home/myname/.ssh`.
+1. Exit SSH session and reconnect as new user.
+1. Disable root SSH access:
+	a. Edit SSH config file: `sudo -e /etc/ssh/sshd_config`.
+	a. Find line "PermitRootLogin yes" and change to "PermitRootLogin no".
+	a. Restart SSH service: `sudo service ssh restart`.

@@ -1,24 +1,92 @@
 snippet ghead1 "First level header" b
-# ==============================================================================
-# `!p import math
-snip.rv = ' ' * int(math.floor((76 - len(t[1]))/2))` ${1:${VISUAL:Header}} `!p import math
-snip.rv = ' ' * int(math.ceil((76 - len(t[1]))/2))`
-# ==============================================================================
+`!p
+# Get total width of line.
+if not snip.c:
+	width = int(vim.eval("80 - virtcol('.')")) + 1
+
+# Get separator line.
+snip.rv = '# ' + (width - 2) * '='
+`
+`!p
+import math
+# Get total width of line.
+if not snip.c:
+	width = int(vim.eval("80 - virtcol('.')")) + 1
+
+# Get user output prefix.
+snip.rv = '# ' + max(0, int(math.floor((width - 4 - len(t[1])) / 2))) * ' '
+` ${1:${VISUAL:Header}}
+`!p
+# Get total width of line.
+if not snip.c:
+	width = int(vim.eval("80 - virtcol('.')")) + 1
+
+# Get separator line.
+snip.rv = '# ' + (width - 2) * '='
+`
 ${0}
 endsnippet
 
 snippet ghead2 "Second level header" b
-# ------------------------------------------------------------------------------
-# `!p import math
-snip.rv = ' ' * int(math.floor((76 - len(t[1]))/2))` ${1:${VISUAL:Header}} `!p import math
-snip.rv = ' ' * int(math.ceil((76 - len(t[1]))/2))`
-# ------------------------------------------------------------------------------
+`!p
+# Get total width of line.
+if not snip.c:
+	width = int(vim.eval("80 - virtcol('.')")) + 1
+
+# Get separator line.
+snip.rv = '# ' + (width - 2) * '-'
+`
+`!p
+import math
+# Get total width of line.
+if not snip.c:
+	width = int(vim.eval("80 - virtcol('.')")) + 1
+
+# Get user output prefix.
+snip.rv = '# ' + max(0, int(math.floor((width - 4 - len(t[1])) / 2))) * ' '
+` ${1:${VISUAL:Header}}
+`!p
+# Get total width of line.
+if not snip.c:
+	width = int(vim.eval("80 - virtcol('.')")) + 1
+
+# Get separator line.
+snip.rv = '# ' + (width - 2) * '-'
+`
 ${0}
 endsnippet
 
 snippet ghead3 "Third level header" b
 # ${1:${VISUAL:Header}}
-# ------------------------------------------------------------------------------
+`!p
+# Get total width of line.
+if not snip.c:
+	width = int(vim.eval("80 - virtcol('.')")) + 1
+
+# Get separator line.
+snip.rv = '# ' + width * '-'
+`
+${0}
+endsnippet
+
+snippet ghead4 "Fourth level header" b
+# `!p
+import math
+# Get total width of line.
+if not snip.c:
+	width = int(vim.eval("80 - virtcol('.')")) + 1
+
+# Get separator line.
+snip.rv = math.floor((width - len(t[1])) / 2) * '-'
+` ${1:${VISUAL:Header}} `!p
+import math
+# Get total width of line.
+if not snip.c:
+	width = int(vim.eval("80 - virtcol('.')")) + 1
+
+# Get separator line.
+snip.rv = math.ceil((width - len(t[1])) / 2) * '-'
+`
 ${0}
 endsnippet
 

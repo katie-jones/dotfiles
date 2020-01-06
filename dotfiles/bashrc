@@ -5,6 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+alias ls='ls --color=auto --block-size=M'
+alias ll='ls -l'
+alias grep='grep --color=auto'
 
 # change bash prompt
 PS1='\[\033[0;34m\]\u \W > \[\033[00m\]'
@@ -26,7 +29,7 @@ export PATH=$GOPATH:$GOPATH/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
 # Solarized colors in console
-source ~/stuff/linux-config/custom-config/solarized_dark
+source ~/Stuff/linux-config/custom-config/solarized_dark
 
 # visual bell
 set bell-style visible
