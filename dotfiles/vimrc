@@ -77,7 +77,8 @@ call matchadd('ColorColumn', '\%80v', 100)
 
 " Status line.
 set laststatus=2
-set statusline+=%{FugitiveStatusline()}
+set statusline+=%f
+set statusline+=\ %{FugitiveStatusline()}
 
 " Enable undo/redo after save.
 if has('persistent_undo')      "check if your vim version supports it
@@ -139,8 +140,8 @@ map <Leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " disable YCM for tex files
 let g:ycm_filetype_blacklist = { 'tex' : 1 }
 
-" Use system (not conda) Python.
-let g:ycm_server_python_interpreter = '/usr/bin/python3.7'
+" use Python 3
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " ---------------------------------------------
 " --------------- TEMPLATE SHIT ---------------
