@@ -1,7 +1,7 @@
 snippet head1 "First level header"
 % ==============================================================================
 %`!p import math
-snip.rv = ' ' * math.floor((78 - len(t[1]))/2)` ${1:${VISUAL:Header}}
+snip.rv = ' ' * int(math.floor((78 - len(t[1]))/2))` ${1:${VISUAL:Header}}
 % ==============================================================================
 $0
 endsnippet
@@ -9,7 +9,7 @@ endsnippet
 snippet head2 "Second level header"
 % ------------------------------------------------------------------------------
 %`!p import math
-snip.rv = ' ' * math.floor((78 - len(t[1]))/2)` ${1:${VISUAL:Header}}
+snip.rv = ' ' * int(math.floor((78 - len(t[1]))/2))` ${1:${VISUAL:Header}}
 % ------------------------------------------------------------------------------
 $0
 endsnippet
