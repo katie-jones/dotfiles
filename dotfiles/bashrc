@@ -29,7 +29,7 @@ export PATH=$GOPATH:$GOPATH/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
 # Solarized colors in console
-source ~/Stuff/linux-config/custom-config/solarized_dark
+source ~/Repos/linux-config/custom-config/solarized_dark
 
 # visual bell
 set bell-style visible
@@ -82,6 +82,8 @@ unlock-sim() {
 
 # Shortcuts.
 # ------------------------------------------------------------------------------
-alias vcomm='cd ~/VirtualBox/Shared/vemo-commissioning/R-2_Commissioning/Calibration'
+alias vcomm='cd ~/VirtualBox/Shared/commissioning-gui/GUI && source ~/.venv/commissioning-3.0/bin/activate'
 alias cman='cd ~/VirtualBox/Shared/vemo-commissioning/Manual'
 alias ssdo='ssh katie@165.227.154.80'
+alias dvis='cd ~/Stuff/utils-techdoc/dataviz && source ~/.venv/dataviz/bin/activate'
+alias skba='cd ~/Documents/06_Experiments/20200122_SKBA && source ~/.venv/commissioning-3.0/bin/activate'

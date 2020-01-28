@@ -9,15 +9,6 @@ map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
 map <silent> ge <Plug>CamelCaseMotion_ge
 
-" Display tabs as width 2.
-set ts=2
-
-" Fold code based on markers
-set foldmethod=expr
-
-" Fold code based on markers
-set foldmethod=expr
-
 " DoxygenToolkit
 let g:DoxygenToolkit_briefTag_pre=""
 

@@ -24,7 +24,7 @@ map <silent> e <Plug>CamelCaseMotion_e
 map <silent> ge <Plug>CamelCaseMotion_ge
 
 " set default YCM config file
-let g:ycm_global_ycm_extra_conf = '~/linux-config/custom-config/ycm_conf_c.py'
+let g:ycm_global_ycm_extra_conf = '~/Stuff/linux-config/custom-config/ycm_conf_c.py'
 
 " visual/normal mode map to make header guard
 vnoremap HD dggi#ifndef <C-r>"_HEADER_DEF_<Return>#define <C-r>"_HEADER_DEF_<Esc>Go<Return>#endif<Esc>k

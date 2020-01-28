@@ -126,6 +126,9 @@ map <Leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " disable YCM for tex files
 let g:ycm_filetype_blacklist = { 'tex' : 1 }
 
+" Set global conf file.
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
 " ---------------------------------------------
 " --------------- TEMPLATE SHIT ---------------
 " ---------------------------------------------

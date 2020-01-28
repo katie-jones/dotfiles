@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (2019) Reactive Robotics GmbH. All rights reserved.
+# Copyright (2020) Reactive Robotics GmbH. All rights reserved.
 
 """%HERE%"""
 
