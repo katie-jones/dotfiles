@@ -146,11 +146,38 @@ let g:templates_global_name_prefix = 'template'
 " No default templates
 let g:template_no_builtin_template = 1
 
-" Default username
-let g:username = 'Katie Jones'
+" Default username/email
+let g:username = 'Kathleen Jones'
+let g:email = 'kathleen.jones@de.abb.com'
 
-" Default email address
-let g:email = 'katie.jones@reactive-robotics.com'
+" User variables
+let g:templates_user_variables = [
+  \   ['SHORTNAME', 'GetShortName'],
+  \   ['HGUARD', 'GetHeaderGuard'],
+  \   ['COPYRIGHT', 'GetCopyright'],
+  \ ]
+
+" Short name function
+function! GetShortName()
+  return 'KJO'
+endfunction
+
+" Header guard function
+function! GetHeaderGuard()
+  return toupper(expand('%:gs/[^0-9a-zA-Z_]/_/g')) . '_'
+endfunction
+
+" Copyright function
+function! GetCopyright()
+  return '
+\ * (C) Copyright 2020 ABB\r
+\ *\r
+\ * The information contained in this document has to be kept strictly\r
+\ * confidential. Any unauthorized use, reproduction, distribution,\r
+\ * or disclosure to third parties is strictly forbidden.\r
+\ * ABB reserves all rights regarding Intellectual Property Rights.'
+endfunction
+
 
 " Disable vim-go auto templates.
 let g:go_template_autocreate = 0

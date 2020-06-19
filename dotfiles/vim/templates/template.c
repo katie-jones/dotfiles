@@ -32,15 +32,6 @@
 %COPYRIGHT%
  ******************************************************************************/
 
-/* Define to prevent recursive inclusion */
-#ifndef %HGUARD%
-#define %HGUARD%
-
-/* C++ detection */
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /* Includes */
 
 /**
@@ -54,7 +45,7 @@ extern "C" {
  */
 
 /**
- * @addtogroup %FILE%_exported_typedefs
+ * @addtogroup %FILE%_private_typedefs
  * @{
  */
 
@@ -63,7 +54,7 @@ extern "C" {
  */
 
 /**
- * @addtogroup %FILE%_exported_defines
+ * @addtogroup %FILE%_private_defines
  * @{
  */
 
@@ -72,9 +63,20 @@ extern "C" {
  */
 
 /**
- * @addtogroup %FILE%_exported_constants
+ * @addtogroup %FILE%_private_variables
  * @{
  */
+
+/**
+ * @}
+ */
+
+/**
+ * @addtogroup %FILE%_private_functions
+ * @{
+ */
+
+/* Private function prototypes */
 
 /**
  * @}
@@ -96,10 +98,3 @@ extern "C" {
 /**
  * @}
  */
-
-/* C++ detection */
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* %HGUARD% */
