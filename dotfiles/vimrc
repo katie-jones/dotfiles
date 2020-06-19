@@ -49,7 +49,11 @@ filetype plugin indent on
 
 syntax enable
 set background=light
+
+let g:solarized_termcolors=16
+set t_Co=16
 colorscheme solarized
+
 set vb
 set spell spelllang=en_us
 
