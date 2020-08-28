@@ -49,7 +49,7 @@ extern "C" {
  */
 
 /**
- * @addtogroup %FILE%
+ * @addtogroup %CFGFNAME%
  * @{
  */
 

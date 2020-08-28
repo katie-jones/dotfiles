@@ -2,7 +2,7 @@ snippet ghead1 "First level header" b
 `!p
 # Get total width of line.
 if not snip.c:
-	width = int(vim.eval("80 - virtcol('.')")) + 1
+  width = int(vim.eval("80 - virtcol('.')")) + 1
 
 # Get separator line.
 snip.rv = '# ' + (width - 2) * '='
@@ -11,7 +11,7 @@ snip.rv = '# ' + (width - 2) * '='
 import math
 # Get total width of line.
 if not snip.c:
-	width = int(vim.eval("80 - virtcol('.')")) + 1
+  width = int(vim.eval("80 - virtcol('.')")) + 1
 
 # Get user output prefix.
 snip.rv = '# ' + max(0, math.floor((width - 4 - len(t[1])) / 2)) * ' '
@@ -19,7 +19,7 @@ snip.rv = '# ' + max(0, math.floor((width - 4 - len(t[1])) / 2)) * ' '
 `!p
 # Get total width of line.
 if not snip.c:
-	width = int(vim.eval("80 - virtcol('.')")) + 1
+  width = int(vim.eval("80 - virtcol('.')")) + 1
 
 # Get separator line.
 snip.rv = '# ' + (width - 2) * '='
@@ -31,7 +31,7 @@ snippet ghead2 "Second level header" b
 `!p
 # Get total width of line.
 if not snip.c:
-	width = int(vim.eval("80 - virtcol('.')")) + 1
+  width = int(vim.eval("80 - virtcol('.')")) + 1
 
 # Get separator line.
 snip.rv = '# ' + (width - 2) * '-'
@@ -40,7 +40,7 @@ snip.rv = '# ' + (width - 2) * '-'
 import math
 # Get total width of line.
 if not snip.c:
-	width = int(vim.eval("80 - virtcol('.')")) + 1
+  width = int(vim.eval("80 - virtcol('.')")) + 1
 
 # Get user output prefix.
 snip.rv = '# ' + max(0, math.floor((width - 4 - len(t[1])) / 2)) * ' '
@@ -48,7 +48,7 @@ snip.rv = '# ' + max(0, math.floor((width - 4 - len(t[1])) / 2)) * ' '
 `!p
 # Get total width of line.
 if not snip.c:
-	width = int(vim.eval("80 - virtcol('.')")) + 1
+  width = int(vim.eval("80 - virtcol('.')")) + 1
 
 # Get separator line.
 snip.rv = '# ' + (width - 2) * '-'
@@ -61,7 +61,7 @@ snippet ghead3 "Third level header" b
 `!p
 # Get total width of line.
 if not snip.c:
-	width = int(vim.eval("80 - virtcol('.')")) + 1
+  width = int(vim.eval("80 - virtcol('.')")) + 1
 
 # Get separator line.
 snip.rv = '# ' + width * '-'
@@ -74,7 +74,7 @@ snippet ghead4 "Fourth level header" b
 import math
 # Get total width of line.
 if not snip.c:
-	width = int(vim.eval("80 - virtcol('.')")) + 1
+  width = int(vim.eval("80 - virtcol('.')")) + 1
 
 # Get separator line.
 snip.rv = math.floor((width - len(t[1])) / 2) * '-'
@@ -82,7 +82,7 @@ snip.rv = math.floor((width - len(t[1])) / 2) * '-'
 import math
 # Get total width of line.
 if not snip.c:
-	width = int(vim.eval("80 - virtcol('.')")) + 1
+  width = int(vim.eval("80 - virtcol('.')")) + 1
 
 # Get separator line.
 snip.rv = math.ceil((width - len(t[1])) / 2) * '-'
@@ -125,4 +125,39 @@ new_text = new_text.replace('max', 'min').replace('Max', 'Min')
 new_text = new_text.replace('x*x*x*x*', 'max').replace('X*X*X*X*', 'Max')
 snip.rv = snip.rv + '\n' + new_text
 `
+endsnippet
+
+snippet mojo "Mirror motor/joint" i
+`!p
+placeholder = 'xxx$#@!!@#$$#@!!@#$xxx'
+temp = snip.v.text.replace('motor', placeholder.lower()).replace('Motor', placeholder.capitalize()).replace('MOTOR', placeholder.upper())
+temp2 = temp.replace('joint', 'motor').replace('Joint', 'Motor').replace('JOINT', 'MOTOR')
+snip.rv = snip.v.text.lstrip(' ') + temp2.replace(placeholder.lower(), 'joint').replace(placeholder.capitalize(), 'Joint').replace(placeholder.upper(), 'JOINT')
+`
+endsnippet
+
+snippet modhis "Modification history line" i
+`!p
+if snip.v.text:
+  snip.rv = snip.v.text.lstrip().rstrip() + '\n' + ' * '
+else:
+  snip.rv = ''
+version = (0, 1)
+try:
+  old_version_str = snip.v.text.split()[1]
+  old_version = tuple(int(x) for x in old_version_str.split('.', maxsplit=1))
+  version = (old_version[0], old_version[1] + 1)
+except:
+  version = (0, 1)
+version_str = '.'.join(str(x) for x in version)
+snip.rv += version_str + (8 - len(version_str)) * ' '
+``!v GetShortName()`       `!v strftime("%d.%m.%Y")` ${0:<+ Initial version +>}
+endsnippet
+
+snippet dox "Doxygen entry" b
+/**
+ * @brief      ${0:${VISUAL}}
+ * @note
+ * @see
+ */
 endsnippet

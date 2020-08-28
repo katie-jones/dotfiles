@@ -3,9 +3,6 @@ let maplocalleader = ","
 " color 80th column to know when to linebreak
 set colorcolumn=80
 
-" set clang options
-let g:clang_format#code_style = "google"
-
 " map FR in normal mode to :ClangFormat
 nnoremap FR :ClangFormat<C-m>
 
@@ -23,9 +20,3 @@ set foldmethod=expr
 
 " Fold code based on markers
 set foldmethod=expr
-
-" DoxygenToolkit
-let g:DoxygenToolkit_briefTag_pre=""
-
-" Let clang-format use Google style
-Glaive codefmt clang_format_style=google

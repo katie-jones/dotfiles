@@ -12,7 +12,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized' " color scheme
 Plugin 'darfink/vim-plist' " edit plist files in vim
-Plugin 'rhysd/vim-clang-format' "use clang-format in vim
+" Plugin 'rhysd/vim-clang-format' "use clang-format in vim
 Plugin 'bkad/CamelCaseMotion' " move using camel case
 Plugin 'scrooloose/nerdcommenter' " kbd shortcuts for commenting
 Plugin 'tmux-plugins/vim-tmux' " for tmux conf file
@@ -20,7 +20,6 @@ Plugin 'Valloric/YouCompleteMe' " for code completion
 Plugin 'scrooloose/nerdtree' " for directory navigation
 Plugin 'jistr/vim-nerdtree-tabs' " for using nerdtree with tabs in vim
 Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
-" Plugin 'scrooloose/syntastic' " syntax highlighting
 Plugin 'tmhedberg/SimpylFold' " python code folding
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'} " status bar
 Plugin 'aperezdc/vim-template' " template files
@@ -79,6 +78,10 @@ let mapleader = ","
 highlight ColorColumn ctermbg=blue guibg=blue
 call matchadd('ColorColumn', '\%80v', 100)
 
+" Allow local .vimrc
+set exrc
+set secure
+
 " ---------------------------------------------
 " ---------------- CODEFMT SHIT ---------------
 " ---------------------------------------------
@@ -96,6 +99,8 @@ augroup autoformat_settings
 augroup END
 
 au BufReadPost * if getline(1) =~ "# codefmt-disable" | let b:codefmt_auto_format_buffer = 0 | endif
+
+Glaive codefmt clang_format_style='file'
 
 " ---------------------------------------------
 " ----------------- NERD SHIT -----------------
@@ -133,6 +138,9 @@ let g:ycm_filetype_blacklist = { 'tex' : 1 }
 " Set global conf file.
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
+" Use location list
+let g:ycm_always_populate_location_list = 1
+
 " ---------------------------------------------
 " --------------- TEMPLATE SHIT ---------------
 " ---------------------------------------------
@@ -155,6 +163,7 @@ let g:templates_user_variables = [
   \   ['SHORTNAME', 'GetShortName'],
   \   ['HGUARD', 'GetHeaderGuard'],
   \   ['COPYRIGHT', 'GetCopyright'],
+  \   ['CFGFNAME', 'GetCfgFname'],
   \ ]
 
 " Short name function
@@ -178,6 +187,10 @@ function! GetCopyright()
 \ * ABB reserves all rights regarding Intellectual Property Rights.'
 endfunction
 
+" Config filename function (remove _cfg at end of filename)
+function! GetCfgFname()
+  return substitute(expand('%:r'), "_cfg$", "", "g")
+endfunction
 
 " Disable vim-go auto templates.
 let g:go_template_autocreate = 0
@@ -224,7 +237,6 @@ au BufNewFile,BufRead *.cc set filetype=cpp
 " bash_katie to sh
 au BufNewFile,BufRead .bash_katie set filetype=sh
 
-
 " ---------------------------------------------
 " --------------- KEY MAPPINGS ----------------
 " ---------------------------------------------
@@ -247,8 +259,10 @@ nnoremap L <C-w><C-l>
 nnoremap H <C-w><C-h>
 
 " open file under cursor in new tab
-nnoremap gF <C-w>gf
-vnoremap gF <C-w>gf
+nnoremap gft <C-w>gf
+vnoremap gft <C-w>gf
+nnoremap gFT <C-w>gF
+vnoremap gFT <C-w>gF
 
 " write as sudo
 cnoremap w!! w !sudo tee % >/dev/null
@@ -270,7 +284,7 @@ vnoremap <space> zf
 set pastetoggle=<F2>
 
 " Change to DOS line endings.
-nnoremap <Leader>cwl :update<CR> :e ++ff=dos<CR> :w<CR>
+nnoremap <Leader>cwl :update<CR> :e ++ff=dos<CR>
 
 " Copy/paste selected to/from clipboard.
 noremap <Leader>y "+y

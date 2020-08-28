@@ -12,5 +12,7 @@
   wdiff = diff --word-diff=color
   nofm = merge --no-ff
 [user]
-	email = katie.jones@reactive-robotics.com
+	email = kathleen.jones@de.abb.com
 	name = Katie Jones
+[core]
+  pager = less -Q

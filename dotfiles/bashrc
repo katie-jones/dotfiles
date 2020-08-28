@@ -8,6 +8,7 @@
 # Add dircolors.
 test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
+# Aliases for common commands
 alias ls='ls --color=auto --block-size=M'
 alias ll='ls -l'
 alias grep='grep --color=auto'
@@ -24,63 +25,14 @@ alias sudo='sudo '
 # Change default editor to vim.
 export EDITOR=vim
 
-# export gopath
-export GOPATH=$HOME/gopath
-export PATH=$GOPATH:$GOPATH/bin:$PATH
-
-# add user-specific path
+# Add user-specific path
 export PATH=$HOME/.local/bin:$PATH
 
 # Solarized colors in console
 # source ~/linux-config/custom-config/solarized_dark
 
-# visual bell
+# Visual bell
 set bell-style visible
 
-# Shortcut for git
-alias g='git '
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f /home/katie/Downloads/google-cloud-sdk/path.bash.inc ]; then
-  source '/home/katie/Downloads/google-cloud-sdk/path.bash.inc'
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f /home/katie/Downloads/google-cloud-sdk/completion.bash.inc ]; then
-  source '/home/katie/Downloads/google-cloud-sdk/completion.bash.inc'
-fi
-
-# Virtualenvwrapper stuff
-export WORKON_HOME=~/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-
-# Add anaconda to path.
-export PATH=/home/katie/anaconda3/bin:$PATH
-
-# ------------------------------------------------------------------------------
-#                             Reactive Robotics Shit
-# ------------------------------------------------------------------------------
-
-# Clone from Reactive Robotics git
-rr-git-clone() {
-[ -z $1 ] && { echo -e "\e[1;31mError: no repository name given.\e[0m"; return 1; }
-repo_name="$1"
-echo "Cloning repository $repo_name"
-git clone "git@bitbucket.org:reactive-robotics/$repo_name.git"
-}
-
-# Chromium extensions.
-# ------------------------------------------------------------------------------
-get-chromium-extension-url() {
-echo "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=72.0&x=id%3D$1%26installsource%3Dondemand%26uc" | xclip -sel clip
-}
-
-# Unlock SIM card and disable PIN.
-# ------------------------------------------------------------------------------
-unlock-sim() {
-    mmcli -i 0 --pin=$1 --disable-pin
-}
-
-# Shortcuts.
-# ------------------------------------------------------------------------------
-alias lint='cd /mnt/d/FunctionalSafety/Lint'
+# Source ABB-specific files
+source ~/.bash-abb

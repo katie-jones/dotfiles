@@ -41,6 +41,7 @@
 
 /**
  * @addtogroup %FILE%
+ * @brief      <++>
  * @{
  */
 
