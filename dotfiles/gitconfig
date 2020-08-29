@@ -12,7 +12,7 @@
   wdiff = diff --word-diff=color
   nofm = merge --no-ff
 [user]
-	email = kathleen.jones@de.abb.com
+	email = knjones@alumni.princeton.edu
 	name = Katie Jones
 [core]
   pager = less -Q
