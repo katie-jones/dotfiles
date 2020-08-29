@@ -29,6 +29,7 @@ Plugin 'honza/vim-snippets' " Code snippets
 Plugin 'tpope/vim-surround' " Surround with quotes, brackets, tags etc.
 Plugin 'tpope/vim-fugitive' " Git plugin for vim
 Plugin 'fatih/vim-go' " Go syntax highlighting etc.
+Plugin 'cespare/vim-toml' " TOML syntax highlighting.
 
 " Add plugins for code formatting
 Plugin 'google/vim-maktaba'
@@ -81,6 +82,9 @@ call matchadd('ColorColumn', '\%80v', 100)
 " Allow local .vimrc
 set exrc
 set secure
+
+" Set tabstop to 2
+set ts=2
 
 " ---------------------------------------------
 " ---------------- CODEFMT SHIT ---------------
