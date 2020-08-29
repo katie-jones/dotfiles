@@ -9,6 +9,9 @@ map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
 map <silent> ge <Plug>CamelCaseMotion_ge
 
+" Fold code based on markers
+set foldmethod=expr
+
 " DoxygenToolkit
 let g:DoxygenToolkit_briefTag_pre=""
 
