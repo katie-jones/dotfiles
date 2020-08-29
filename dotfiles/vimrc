@@ -16,7 +16,6 @@ Plugin 'darfink/vim-plist' " edit plist files in vim
 Plugin 'bkad/CamelCaseMotion' " move using camel case
 Plugin 'scrooloose/nerdcommenter' " kbd shortcuts for commenting
 Plugin 'tmux-plugins/vim-tmux' " for tmux conf file
-Plugin 'Valloric/YouCompleteMe' " for code completion
 Plugin 'scrooloose/nerdtree' " for directory navigation
 Plugin 'jistr/vim-nerdtree-tabs' " for using nerdtree with tabs in vim
 Plugin 'Xuyuanp/nerdtree-git-plugin' " show git status in nerdtree
